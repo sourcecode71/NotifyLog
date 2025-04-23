@@ -47,11 +47,7 @@ export class SendNotificationUseCase {
     // Send notification
     const strategy: INotificationStrategy =
       NotificationFactory.create(mediaType);
-    await strategy.send(
-      notification.recipient,
-      notification.subject,
-      notification.body,
-    );
+    await strategy.send(notification);
 
     // Save to MongoDB
     await this.notificationRepository.save(notification);

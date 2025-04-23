@@ -7,6 +7,10 @@ import { NotificationChannel } from 'src/config/notification.config';
 
 @Injectable()
 export class NotificationFactory {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  static create(_arg0: any): INotificationStrategy {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private readonly emailStrategy: EmailNotificationStrategy,
     private readonly smsStrategy: SMSNotificationStrategy,

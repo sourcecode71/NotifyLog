@@ -15,7 +15,10 @@ import { SMSNotificationStrategy } from '../application/strategies/sms-notificat
   ],
   controllers: [NotificationController],
   providers: [
-    NotificationRepository,
+    {
+      provide: 'INotificationRepository',
+      useClass: NotificationRepository,
+    },
     NotificationFactory,
     EmailNotificationStrategy,
     SMSNotificationStrategy,
