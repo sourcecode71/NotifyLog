@@ -12,6 +12,7 @@ import { SendNotificationDto } from '../dtos/common/send-notification.dto';
 import { Notification } from '../../domain/entities/common/notification.entity';
 import { INotificationStrategy } from '../../domain/interfaces/common/notification-strategy.interface';
 import { INotificationRepository } from '../../domain/interfaces/common/notification-repository.interface';
+import { LoggerService } from '../../../logger/services/logger.service';
 
 @Controller('notifications')
 export class NotificationController {
@@ -19,6 +20,7 @@ export class NotificationController {
     private readonly notificationFactory: NotificationFactory,
     @Inject('INotificationRepository')
     private readonly notificationRepository: INotificationRepository,
+    private readonly logger: LoggerService,
   ) {}
 
   @Post()
@@ -27,6 +29,7 @@ export class NotificationController {
     // Validate input
     const { error } = NotificationValidator.validateCreateNotification(dto);
     if (error) {
+      this.logger.error(`Validation failed: ${error.message}`);
       throw new Error(`Validation failed: ${error.message}`);
     }
 
@@ -47,5 +50,10 @@ export class NotificationController {
 
     // Save notification after successful send
     await this.notificationRepository.save(notification);
+
+    // Log successful send
+    this.logger.log(
+      `Notification sent to ${dto.recipient} via ${dto.mediaType}`,
+    );
   }
 }

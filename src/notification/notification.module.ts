@@ -6,12 +6,14 @@ import { NotificationSchema } from './infrastructure/persistence/mongoose/notifi
 import { NotificationFactory } from './application/factories/common/notification.factory';
 import { EmailNotificationStrategy } from './application/strategies/email-notification.strategy';
 import { SMSNotificationStrategy } from './application/strategies/sms-notification.strategy';
+import { LoggerModule } from '../logger/logger.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: 'Notification', schema: NotificationSchema },
     ]),
+    LoggerModule,
   ],
   controllers: [NotificationController],
   providers: [
