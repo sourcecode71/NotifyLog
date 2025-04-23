@@ -1,4 +1,4 @@
-import { NotificationChannel } from '../../../config/notification.config';
+import { NotificationChannel } from '../../../../config/notification.config';
 
 export class SendNotificationDto {
   recipient: string;

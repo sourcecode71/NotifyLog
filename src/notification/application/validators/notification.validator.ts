@@ -1,5 +1,5 @@
 import * as Joi from 'joi';
-import { NotificationChannel } from '../../config/notification.config';
+import { NotificationChannel } from '../../../config/notification.config';
 import { SendNotificationDto } from '../../presentation/dtos/common/send-notification.dto';
 
 export class NotificationValidator {

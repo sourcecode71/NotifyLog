@@ -1,8 +1,8 @@
-import { UnsupportedMediaTypeError } from 'src/domain/errors/unsupported-media-type.error';
+import { UnsupportedMediaTypeError } from '../../domain/errors/unsupported-media-type.error';
 import { EmailNotificationStrategy } from '../../application/strategies/email-notification.strategy';
 import { SMSNotificationStrategy } from '../../application/strategies/sms-notification.strategy';
 import { INotificationStrategy } from '../../domain/interfaces/common/notification-strategy.interface';
-import { NotificationChannel } from '../../config/notification.config';
+import { NotificationChannel } from '../../../config/notification.config';
 
 // Define a type for strategy constructors
 type StrategyConstructor = new () => INotificationStrategy;

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Notification } from '../../domain/entities/common/notification.entity';
 import { INotificationStrategy } from '../../domain/interfaces/common/notification-strategy.interface';
 import { NotificationFactory } from '../../infrastructure/factories/notification.factory';
-import { NotificationChannel } from '../../config/notification.config';
+import { NotificationChannel } from '../../../config/notification.config';
 import { NotificationRepository } from '../../infrastructure/repositories/notification.repository';
 import { NotificationValidator } from '../validators/notification.validator';
 
