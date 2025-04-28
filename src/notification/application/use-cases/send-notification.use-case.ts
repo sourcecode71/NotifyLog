@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Notification } from '../../domain/entities/common/notification.entity';
-import { INotificationStrategy } from '../../domain/interfaces/common/notification-strategy.interface';
+import { Notification } from '../../domain/entities/notification.entity';
+import { INotificationStrategy } from '../../domain/interfaces/notification-strategy.interface';
 import { NotificationFactory } from '../../infrastructure/factories/notification.factory';
 import { NotificationChannel } from '../../../config/notification.config';
 import { NotificationRepository } from '../../infrastructure/repositories/notification.repository';
 import { NotificationValidator } from '../validators/notification.validator';
+import { NotificationType } from '../../presentation/dtos/send-notification.dto';
 
 @Injectable()
 export class SendNotificationUseCase {
@@ -25,6 +26,7 @@ export class SendNotificationUseCase {
         subject,
         body,
         mediaType,
+        notificationType: NotificationType.ADMISSION_ID,
       });
     // Check for validation errors
     const error = validationResult.error;

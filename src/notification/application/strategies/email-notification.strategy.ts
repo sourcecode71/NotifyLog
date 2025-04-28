@@ -1,5 +1,5 @@
-import { INotificationStrategy } from '../../domain/interfaces/common/notification-strategy.interface';
-import { Notification } from '../../domain/entities/common/notification.entity';
+import { INotificationStrategy } from '../../domain/interfaces/notification-strategy.interface';
+import { Notification } from '../../domain/entities/notification.entity';
 
 export class EmailNotificationStrategy implements INotificationStrategy {
   constructor(private emailClient?: any) {

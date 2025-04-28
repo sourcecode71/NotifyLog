@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { NotificationController } from './presentation/controllers/notification.controller';
 import { NotificationRepository } from './infrastructure/repositories/notification.repository';
 import { NotificationSchema } from './infrastructure/persistence/mongoose/notification.schema';
-import { NotificationFactory } from './application/factories/common/notification.factory';
+import { NotificationFactory } from './application/factories/notification.factory';
 import { EmailNotificationStrategy } from './application/strategies/email-notification.strategy';
 import { SMSNotificationStrategy } from './application/strategies/sms-notification.strategy';
 import { LoggerModule } from '../logger/logger.module';

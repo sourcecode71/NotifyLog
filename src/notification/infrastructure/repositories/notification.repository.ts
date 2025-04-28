@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Notification } from '../../domain/entities/common/notification.entity';
-import { INotificationRepository } from '../../domain/interfaces/common/notification-repository.interface'; // Ensure this file exists at the specified path
+import { Notification } from '../../domain/entities/notification.entity';
+import { INotificationRepository } from '../../domain/interfaces/notification-repository.interface'; // Ensure this file exists at the specified path
 import { NotificationDocument } from '../persistence/mongoose/notification.schema';
 
 @Injectable()

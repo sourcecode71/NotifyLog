@@ -6,15 +6,17 @@ import {
   HttpStatus,
   Inject,
 } from '@nestjs/common';
-import { NotificationFactory } from '../../application/factories/common/notification.factory';
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { NotificationFactory } from '../../application/factories/notification.factory';
 import { NotificationValidator } from '../../application/validators/notification.validator';
-import { SendNotificationDto } from '../dtos/common/send-notification.dto';
-import { Notification } from '../../domain/entities/common/notification.entity';
-import { INotificationStrategy } from '../../domain/interfaces/common/notification-strategy.interface';
-import { INotificationRepository } from '../../domain/interfaces/common/notification-repository.interface';
+import { SendNotificationDto } from '../dtos/send-notification.dto';
+import { Notification } from '../../domain/entities/notification.entity';
+import { INotificationStrategy } from '../../domain/interfaces/notification-strategy.interface';
+import { INotificationRepository } from '../../domain/interfaces/notification-repository.interface';
 import { LoggerService } from '../../../logger/services/logger.service';
 
-@Controller('notifications')
+@ApiTags('Notifications')
+@Controller('api/notifications')
 export class NotificationController {
   constructor(
     private readonly notificationFactory: NotificationFactory,
@@ -25,6 +27,19 @@ export class NotificationController {
 
   @Post()
   @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({
+    summary:
+      'Send a notification for educational use cases (admission, registration, etc.)',
+  })
+  @ApiBody({ type: SendNotificationDto })
+  @ApiResponse({
+    status: 204,
+    description: 'Notification sent successfully',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Validation failed',
+  })
   async send(@Body() dto: SendNotificationDto): Promise<void> {
     // Validate input
     const { error } = NotificationValidator.validateCreateNotification(dto);
@@ -42,10 +57,11 @@ export class NotificationController {
       new Date(),
     );
 
+    console.log('notification strategy creation started');
     // Send notification
-    const strategy: INotificationStrategy = NotificationFactory.create(
-      dto.mediaType as any,
-    );
+    const strategy: INotificationStrategy =
+      this.notificationFactory.createStrategy(dto.mediaType);
+    console.log('notification strategy is created');
     await strategy.send(notification);
 
     // Save notification after successful send
@@ -53,7 +69,7 @@ export class NotificationController {
 
     // Log successful send
     this.logger.log(
-      `Notification sent to ${dto.recipient} via ${dto.mediaType}`,
+      `Notification (${dto.notificationType}) sent to ${dto.recipient} via ${dto.mediaType}`,
     );
   }
 }

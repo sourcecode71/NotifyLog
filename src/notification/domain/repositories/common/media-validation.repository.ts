@@ -1,4 +1,4 @@
-import { Notification } from '../../../domain/entities/common/notification.entity';
+import { Notification } from '../../entities/notification.entity';
 
 export interface IMediaValidationRepository {
   save(validation: Notification): Promise<void>;

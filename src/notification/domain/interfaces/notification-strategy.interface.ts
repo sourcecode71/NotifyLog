@@ -1,4 +1,4 @@
-import { Notification } from '../../entities/common/notification.entity';
+import { Notification } from '../entities/notification.entity';
 
 export interface INotificationStrategy {
   send(recipient: Notification): Promise<void>;

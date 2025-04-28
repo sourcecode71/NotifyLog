@@ -1,5 +1,5 @@
-import { INotificationStrategy } from '../../domain/interfaces/common/notification-strategy.interface';
-import { Notification } from '../../domain/entities/common/notification.entity';
+import { INotificationStrategy } from '../../domain/interfaces/notification-strategy.interface';
+import { Notification } from '../../domain/entities/notification.entity';
 
 export class SMSNotificationStrategy implements INotificationStrategy {
   constructor(private smsClient?: any) {
