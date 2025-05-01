@@ -25,4 +25,31 @@ export class LoggerServiceDb {
       timestamp: new Date(),
     });
   }
+  async getLogsByFilter(
+    level: string,
+    context: string | undefined,
+    page: number,
+    limit: number,
+  ) {
+    const logs = await this.logRepository.findLogsByFilter(
+      level,
+      context,
+      page,
+      limit,
+    );
+    if (!logs || logs.length === 0) {
+      throw new Error(
+        `No logs found. Level: ${level}, Context: ${context}, Page: ${page}, Limit: ${limit}`,
+      );
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return logs;
+  }
+  async getLogById(id: string) {
+    const log = await this.logRepository.findLogById(id);
+    if (!log) {
+      throw new Error(`Log with ID: ${id} not found`);
+    }
+    return log;
+  }
 }

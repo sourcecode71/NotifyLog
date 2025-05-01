@@ -5,8 +5,16 @@ import {
   HttpCode,
   HttpStatus,
   Inject,
+  Get,
+  Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { NotificationFactory } from '../../application/factories/notification.factory';
 import { NotificationValidator } from '../../application/validators/notification.validator';
 import { SendNotificationDto } from '../dtos/send-notification.dto';
@@ -15,10 +23,12 @@ import { INotificationStrategy } from '../../domain/interfaces/notification-stra
 import { INotificationRepository } from '../../domain/interfaces/notification-repository.interface';
 import { LoggerServiceFile } from '../../../logger/services/logger.service.file';
 import { LoggerServiceDb } from '../../../logger/services/logger.service.db';
+import { number } from 'joi';
 
 @ApiTags('Notifications')
 @Controller('api/notifications')
 export class NotificationController {
+  notificationModel: import('mongoose').Model<Notification>;
   constructor(
     private readonly notificationFactory: NotificationFactory,
     @Inject('INotificationRepository')
@@ -75,5 +85,41 @@ export class NotificationController {
       `Notification (${dto.notificationType}) sent to ${dto.recipient} via ${dto.mediaType}`,
     );
     await this.loggerDb.error(`Exception occurred while sending notification`);
+  }
+  @Get('history')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Notification history retrieved',
+  })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'Page number (default: 1)',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    type: Number,
+    description: 'Items per page (default: 10)',
+  })
+  async getNotificationHistory(
+    @Query('page') page = 1,
+    @Query('limit') limit = 10,
+  ) {
+    const skip = (page - 1) * limit;
+    const notifications = await this.notificationModel
+      .find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .exec();
+    const total = await this.notificationModel.countDocuments().exec();
+    return {
+      data: notifications,
+      total: number,
+      page: number,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 }

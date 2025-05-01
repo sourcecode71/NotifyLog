@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { NotificationController } from './presentation/controllers/notification.controller';
+import { LogController } from './presentation/controllers/log.controller';
 import { NotificationRepository } from './infrastructure/repositories/notification.repository';
 import { NotificationSchema } from './infrastructure/persistence/mongoose/notification.schema';
 import { NotificationFactory } from './application/factories/notification.factory';
@@ -15,7 +16,7 @@ import { LoggerModule } from '../logger/logger.module';
     ]),
     LoggerModule,
   ],
-  controllers: [NotificationController],
+  controllers: [NotificationController, LogController],
   providers: [
     {
       provide: 'INotificationRepository',
