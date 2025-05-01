@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LoggerService } from './services/logger.service';
+import { LoggerServiceFile } from './services/logger.service.file';
+import { LoggerServiceDb } from './services/logger.service.db';
 import { LogRepository } from './infrastructure/repositories/log.repository';
 import {
   Logger,
@@ -12,13 +13,14 @@ import {
     MongooseModule.forFeature([{ name: Logger.name, schema: LoggerSchema }]),
   ],
   providers: [
-    LoggerService,
+    LoggerServiceFile,
+    LoggerServiceDb,
     LogRepository,
     {
       provide: 'ILogRepository',
       useClass: LogRepository,
     },
   ],
-  exports: [LoggerService, 'ILogRepository', LogRepository],
+  exports: [LoggerServiceFile, LoggerServiceDb],
 })
 export class LoggerModule {}

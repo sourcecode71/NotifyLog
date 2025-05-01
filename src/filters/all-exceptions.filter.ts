@@ -5,11 +5,11 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { LoggerService } from '../logger/services/logger.service';
+import { LoggerServiceFile } from '../logger/services/logger.service.file';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private readonly logger: LoggerService) {}
+  constructor(private readonly logger: LoggerServiceFile) {}
 
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();

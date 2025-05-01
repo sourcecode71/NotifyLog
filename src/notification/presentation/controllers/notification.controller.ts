@@ -13,7 +13,8 @@ import { SendNotificationDto } from '../dtos/send-notification.dto';
 import { Notification } from '../../domain/entities/notification.entity';
 import { INotificationStrategy } from '../../domain/interfaces/notification-strategy.interface';
 import { INotificationRepository } from '../../domain/interfaces/notification-repository.interface';
-import { LoggerService } from '../../../logger/services/logger.service';
+import { LoggerServiceFile } from '../../../logger/services/logger.service.file';
+import { LoggerServiceDb } from '../../../logger/services/logger.service.db';
 
 @ApiTags('Notifications')
 @Controller('api/notifications')
@@ -22,7 +23,8 @@ export class NotificationController {
     private readonly notificationFactory: NotificationFactory,
     @Inject('INotificationRepository')
     private readonly notificationRepository: INotificationRepository,
-    private readonly logger: LoggerService,
+    private readonly logger: LoggerServiceFile,
+    private readonly loggerDb: LoggerServiceDb,
   ) {}
 
   @Post()
@@ -61,8 +63,9 @@ export class NotificationController {
     // Send notification
     const strategy: INotificationStrategy =
       this.notificationFactory.createStrategy(dto.mediaType);
-    console.log('notification strategy is created');
     await strategy.send(notification);
+
+    console.log('notification strategy creation ended');
 
     // Save notification after successful send
     await this.notificationRepository.save(notification);
@@ -71,5 +74,6 @@ export class NotificationController {
     this.logger.log(
       `Notification (${dto.notificationType}) sent to ${dto.recipient} via ${dto.mediaType}`,
     );
+    await this.loggerDb.error(`Exception occurred while sending notification`);
   }
 }
