@@ -1,94 +1,45 @@
 # NotifyLog
 
-![Build Status](https://img.shields.io/github/workflow/status/your-username/NotifyLog/CI/main)
-![License](https://img.shields.io/github/license/your-username/NotifyLog)
-![GitHub Stars](https://img.shields.io/github/stars/your-username/NotifyLog)
+![Build Status](https://img.shields.io/github/workflow/status/your-username/notifylog/CI/main)
+![License](https://img.shields.io/github/license/your-username/notifylog)
+![GitHub Stars](https://img.shields.io/github/stars/your-username/notifylog)
 
-**NotifyLog** is a full-stack Node.js/NestJS microservice built with clean architecture and SOLID principles, designed for sending email/SMS notifications, logging messages/errors, and managing webhooks. It’s portable, modular, and paired with a Next.js/React frontend to visualize notification and error log history. Features an interactive **Swagger UI** for API exploration.
+**NotifyLog** is a full-stack Node.js/NestJS microservice built with **clean architecture** and **SOLID principles**, designed for sending email/SMS notifications, logging messages/errors, and managing webhooks. It’s portable, modular, and paired with a Next.js/React frontend dashboard for visualizing notification and error log history. Features a **GraphQL API** for flexible querying.
 
 ## Table of Contents
 - [Features](#features)
 - [Tech Stack](#tech-stack)
+- [Clean Architecture](#clean-architecture)
+- [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Frontend Setup](#frontend-setup)
 - [API Documentation](#api-documentation)
+- [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Features
 - Send notifications (email/SMS) with a strategy pattern.
-- Dual logging: Winston for info logs, MongoDB for error logs.
+- Centralized logging with Winston and MongoDB transport.
 - Webhook subscriptions for real-time event notifications.
-- Advanced log filtering and retrieval.
-- Next.js/React frontend for notification and error log history.
-- **Swagger UI** for interactive API documentation.
+- Advanced log filtering and retrieval via GraphQL.
+- Next.js/React frontend dashboard for notification and error log history.
+- **GraphQL API** for flexible, type-safe queries.
+- Extensible and portable for integration into any project.
 
 ## Tech Stack
-- **Backend**: Node.js, NestJS, MongoDB, Mongoose, Winston, TypeScript
+- **Backend**: Node.js, NestJS, GraphQL, Prisma, MongoDB, Winston, TypeScript
 - **Frontend**: Next.js, React, Tailwind CSS, React Query
-- **Tools**: Swagger UI, Prettier, ESLint
+- **Tools**: Prisma, GraphQL Playground, Prettier, ESLint, Docker
 
-## Getting Started (Backend)
-### Prerequisites
-- Node.js (>=18.x)
-- MongoDB (local or Atlas)
-- Git
+## Clean Architecture
+**NotifyLog** adheres to **clean architecture** and **SOLID principles**, ensuring modularity, testability, and maintainability. Key layers include:
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/NotifyLog.git
-   cd NotifyLog
+- **Domain** (`apps/notifylog-api/src/domain/`): Defines interfaces (e.g., `INotificationRepository`, `IWebhookRepository`) for business logic, independent of frameworks (Single Responsibility).
+- **Application** (`apps/notifylog-api/src/application/`): Implements business rules via factories (`NotificationFactory`) and strategies (`EmailNotificationStrategy`, `SMSNotificationStrategy`) (Dependency Inversion).
+- **Infrastructure** (`apps/notifylog-api/src/infrastructure/`): Handles persistence (`prisma/schema.prisma`) and repositories (`NotificationRepository`, `WebhookRepository`) (Open/Closed).
+- **Presentation** (`apps/notifylog-api/src/presentation/`): Exposes GraphQL APIs through resolvers (`NotificationResolver`, `WebhookResolver`, `LogResolver`) (Interface Segregation).
 
+Shared utilities and logging are abstracted into `libs/` for reusability across apps.
 
-Install dependencies:npm install
-
-
-Create .env:MONGO_URI=mongodb://localhost:27017/notifylog
-
-
-Start MongoDB:mongod
-
-
-Run the backend:npm run start
-
-
-
-Testing
-
-Access Swagger UI: http://localhost:3000/api
-Send notification:curl -X POST http://localhost:3000/api/notifications \
--H 'Content-Type: application/json' \
--d '{"recipient":"test@example.com","subject":"Test","body":"Message ID: MSG123.","mediaType":"EMAIL","notificationType":"message-id"}'
-
-
-Get logs:curl http://localhost:3000/api/logs?level=error&context=NotificationController
-
-
-
-Frontend Setup
-Prerequisites
-
-Node.js (>=18.x)
-Backend running at http://localhost:3000
-
-Installation
-
-Clone the frontend (or navigate to directory):git clone https://github.com/your-username/notifylog-frontend.git
-cd notifylog-frontend
-
-
-Install dependencies:npm install
-
-
-Run the frontend:npm run dev
-
-
-Access at http://localhost:3001.
-
-API Documentation
-Explore APIs interactively via Swagger UI at http://localhost:3000/api. Test endpoints like /api/notifications, /api/webhooks, and /api/logs with a user-friendly interface.
-Contributing
-Contributions are welcome! Check CONTRIBUTING.md for guidelines and issues for tasks (good first issue, hacktoberfest). Join our Discord.
-License
-MIT License. See LICENSE.```
+## Project Structure
