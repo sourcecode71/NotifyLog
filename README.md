@@ -31,6 +31,151 @@ Use NotifyLog as:
 - An integration-ready module in any SaaS or enterprise app
 
 ---
+Sure! Here's a clean and properly formatted `README.md` file that includes all the content you provided:
+
+---
+
+```markdown
+# NotifyLog 🚨
+
+A notification management system with logging, monitoring, and multi-channel delivery support.
+
+---
+
+## ⚙️ Setup & Installation
+
+### 🔧 Prerequisites
+
+- **Node.js** ≥ 18.x
+- **Yarn** or **npm**
+- **MongoDB** or **MongoDB Atlas**
+- **Docker** (optional)
+
+---
+
+## 🚀 Run Locally
+
+```bash
+# Clone repo
+git clone https://github.com/yourusername/notifylog.git && cd notifylog
+
+# Install dependencies
+yarn install
+
+# Setup environment variables
+cp .env.example .env
+# Fill in your email/SMS API keys, Mongo URI, etc.
+
+# Start backend
+yarn start:dev:api
+
+# Start frontend
+yarn start:dev:ui
+```
+
+---
+
+## 🐳 Run with Docker
+
+```bash
+docker-compose up --build
+```
+
+---
+
+## 📌 Features
+
+✅ GraphQL API to manage notifications, logs, and subscriptions  
+📧 Email Module (send emails using SendGrid/Mailgun)  
+📲 SMS Module (Twilio integration)  
+🔔 Webhook Support (event-based triggers to external services)  
+📝 MongoDB Logging with Winston (request/response/errors)  
+🧩 Extensible Providers (add your own integrations easily)  
+💻 Next.js UI for monitoring and manual message dispatch  
+
+---
+
+## 🔬 Example GraphQL Query
+
+```graphql
+mutation SendEmail {
+  sendNotification(input: {
+    type: "EMAIL",
+    to: "example@domain.com",
+    subject: "Welcome!",
+    message: "Hello from NotifyLog!"
+  }) {
+    success
+    messageId
+  }
+}
+```
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+yarn test
+
+# Run coverage
+yarn test:cov
+```
+
+---
+
+## 📈 Roadmap
+
+- WebSocket-based real-time logs  
+- Retry strategy for failed webhook calls  
+- Admin dashboard analytics  
+- SMTP transport fallback  
+- Mobile-friendly UI  
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions of all kinds!
+
+1. Fork the repo
+2. Create your feature branch: `git checkout -b feat/amazing-feature`
+3. Commit your changes: `git commit -am 'Add amazing feature'`
+4. Push to the branch: `git push origin feat/amazing-feature`
+5. Open a pull request
+
+For more info, see [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+## 🐛 Issue Templates
+
+Need to report a bug or request a feature? Use the templates in `.github/ISSUE_TEMPLATE`:
+
+- 🐞 Bug Report  
+- ✨ Feature Request  
+- 📚 Documentation Update  
+- 🆕 Good First Issue  
+
+---
+
+## 🛡 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 📣 Contact & Credits
+
+Maintained by **Your Name** – feel free to connect on [LinkedIn] or [Twitter].
+
+Special thanks to all contributors 💖
+```
+
+---
+
+Let me know if you'd like this customized with your actual GitHub username, social links, or any branding tweaks!
 
 ## 📂 Project Structure
 
