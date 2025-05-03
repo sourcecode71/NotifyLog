@@ -1,3 +1,4 @@
+```markdown
 # NotifyLog
 
 ![Build Status](https://img.shields.io/github/workflow/status/your-username/notifylog/CI/main)
@@ -33,7 +34,7 @@
 - **Tools**: Prisma, GraphQL Playground, Prettier, ESLint, Docker
 
 ## Clean Architecture
-**NotifyLog** adheres to **clean architecture** and **SOLID principles**, ensuring modularity, testability, and maintainability. Key layers include:
+**NotifyLog** follows **clean architecture** and **SOLID principles**, ensuring modularity, testability, and maintainability. Key layers include:
 
 - **Domain** (`apps/notifylog-api/src/domain/`): Defines interfaces (e.g., `INotificationRepository`, `IWebhookRepository`) for business logic, independent of frameworks (Single Responsibility).
 - **Application** (`apps/notifylog-api/src/application/`): Implements business rules via factories (`NotificationFactory`) and strategies (`EmailNotificationStrategy`, `SMSNotificationStrategy`) (Dependency Inversion).
@@ -43,7 +44,7 @@
 Shared utilities and logging are abstracted into `libs/` for reusability across apps.
 
 ## Project Structure
-
+```
 notifylog/
 ├── apps/                   # Monorepo applications
 │   ├── notifylog-api/        # NestJS microservice (GraphQL + Notification logic)
@@ -135,4 +136,96 @@ notifylog/
 ├── README.md
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
-└── LICENSE
+├── LICENSE
+```
+
+## Getting Started (Backend)
+### Prerequisites
+- Node.js (>=18.x)
+- MongoDB (local or Atlas)
+- Yarn or npm
+- Docker (optional)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/notifylog.git
+   cd notifylog
+   ```
+2. Install dependencies:
+   ```bash
+   yarn install
+   ```
+3. Set up environment variables:
+   ```bash
+   cp apps/notifylog-api/.env.example apps/notifylog-api/.env
+   ```
+   Update `apps/notifylog-api/.env`:
+   ```env
+   DATABASE_URL=mongodb://localhost:27017/notifylog
+   ```
+4. Run Prisma migrations:
+   ```bash
+   cd apps/notifylog-api
+   npx prisma migrate dev
+   ```
+5. Start the backend:
+   ```bash
+   yarn workspace notifylog-api start:dev
+   ```
+
+### Docker Setup
+Run both backend and frontend with Docker:
+```bash
+docker-compose up --build
+```
+
+## Frontend Setup
+### Prerequisites
+- Node.js (>=18.x)
+- Backend running at `http://localhost:3000`
+
+### Installation
+1. Install frontend dependencies:
+   ```bash
+   cd apps/notifylog-ui
+   yarn install
+   ```
+2. Run the frontend:
+   ```bash
+   yarn dev
+   ```
+3. Access at `http://localhost:3001`.
+
+## API Documentation
+Explore the **GraphQL API** via **GraphQL Playground** at [http://localhost:3000/graphql](http://localhost:3000/graphql). Example query:
+```graphql
+mutation SendNotification {
+  sendNotification(input: {
+    type: "EMAIL"
+    to: "example@domain.com"
+    subject: "Welcome!"
+    message: "Hello from NotifyLog!"
+  }) {
+    success
+    messageId
+  }
+}
+```
+
+## Testing
+Run tests with Jest:
+```bash
+yarn test
+```
+Generate coverage:
+```bash
+yarn test:cov
+```
+
+## Contributing
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and [issues](https://github.com/your-username/notifylog/issues) for tasks (`good first issue`, `hacktoberfest`). Use issue templates in `.github/ISSUE_TEMPLATE`. Join our [Discord](https://discord.gg/your-invite-link).
+
+## License
+MIT License. See [LICENSE](LICENSE).
+```
