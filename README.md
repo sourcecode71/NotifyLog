@@ -44,4 +44,95 @@ Shared utilities and logging are abstracted into `libs/` for reusability across 
 
 ## Project Structure
 
-notifylog/ ├── apps/ │ ├── notifylog-api/ # NestJS microservice (GraphQL + Notification logic) │ │ ├── src/ │ │ │ ├── application/ │ │ │ │ ├── factories/ │ │ │ │ │ ├── notification.factory.ts │ │ │ │ ├── strategies/ │ │ │ │ │ ├── email-notification.strategy.ts │ │ │ │ │ ├── sms-notification.strategy.ts │ │ │ ├── domain/ │ │ │ │ ├── interfaces/ │ │ │ │ │ ├── notification-repository.interface.ts │ │ │ │ │ ├── webhook-repository.interface.ts │ │ │ ├── infrastructure/ │ │ │ │ ├── repositories/ │ │ │ │ │ ├── notification.repository.ts │ │ │ │ │ ├── webhook.repository.ts │ │ │ ├── presentation/ │ │ │ │ ├── resolvers/ │ │ │ │ │ ├── notification.resolver.ts │ │ │ │ │ ├── webhook.resolver.ts │ │ │ │ │ ├── log.resolver.ts │ │ │ ├── dto/ │ │ │ │ ├── notification.dto.ts │ │ │ ├── services/ │ │ │ │ ├── log.service.ts │ │ │ ├── app.module.ts │ │ │ ├── main.ts │ │ ├── package.json │ │ ├── tsconfig.json │ │ ├── .env.example │ └── notifylog-ui/ # Next.js frontend dashboard │ ├── src/ │ │ ├── app/ │ │ │ ├── page.tsx │ │ │ ├── notifications/ │ │ │ │ ├── page.tsx │ │ │ ├── errors/ │ │ │ │ ├── page.tsx │ │ │ ├── layout.tsx │ │ │ ├── globals.css │ │ ├── components/ │ │ │ ├── Header.tsx │ │ │ ├── NotificationTable.tsx │ │ │ ├── ErrorTable.tsx │ │ ├── lib/ │ │ │ ├── api.ts │ │ │ ├── types.ts │ ├── public/ │ ├── package.json │ ├── tsconfig.json │ ├── next.config.js ├── libs/ │ ├── logger/ # Winston logger (MongoDB transport) │ │ ├── src/ │ │ │ ├── interfaces/ │ │ │ │ ├── log-repository.interface.ts │ │ │ ├── persistence/ │ │ │ │ ├── logger.schema.ts │ │ │ ├── repositories/ │ │ │ │ ├── log.repository.ts │ │ │ ├── services/ │ │ │ │ ├── logger.service.file.ts │ │ │ │ ├── logger.service.db.ts │ │ ├── package.json │ │ ├── tsconfig.json │ └── utils/ # Shared helpers, interceptors, constants │ ├── src/ │ │ ├── helpers/ │ │ │ ├── string.utils.ts │ │ │ ├── validation.utils.ts │ │ ├── interceptors/ │ │ │ ├── logging.interceptor.ts │ │ ├── constants/ │ │ │ ├── app.constants.ts │ ├── package.json │ ├── tsconfig.json ├── prisma/ # Prisma ORM config & schema │ ├── schema.prisma │ ├── migrations/ ├── docker/ # Docker & Docker Compose files │ ├── Dockerfile.api │ ├── Dockerfile.ui │ ├── docker-compose.yml ├── .github/ # Issue templates & GitHub Actions │ ├── ISSUE_TEMPLATE/ │ │ ├── bug_report.md │ │ ├── feature_request.md │ ├── workflows/ │ │ ├── ci.yml ├── README.md ├── CONTRIBUTING.md ├── CODE_OF_CONDUCT.md ├── LICENSE
+notifylog/
+├── apps/                   # Monorepo applications
+│   ├── notifylog-api/        # NestJS microservice (GraphQL + Notification logic)
+│   │   ├── src/
+│   │   │   ├── application/  # Business logic
+│   │   │   │   ├── factories/
+│   │   │   │   │   └── notification.factory.ts
+│   │   │   │   └── strategies/
+│   │   │   │       ├── email-notification.strategy.ts
+│   │   │   │       └── sms-notification.strategy.ts
+│   │   │   ├── domain/       # Core entities/interfaces
+│   │   │   │   └── interfaces/
+│   │   │   │       ├── notification-repository.interface.ts
+│   │   │   │       └── webhook-repository.interface.ts
+│   │   │   ├── infrastructure/ # DB adapters
+│   │   │   │   └── repositories/
+│   │   │   │       ├── notification.repository.ts
+│   │   │   │       └── webhook.repository.ts
+│   │   │   ├── presentation/ # GraphQL resolvers
+│   │   │   │   └── resolvers/
+│   │   │   │       ├── notification.resolver.ts
+│   │   │   │       ├── webhook.resolver.ts
+│   │   │   │       └── log.resolver.ts
+│   │   │   ├── dto/          # Data transfer objects
+│   │   │   │   └── notification.dto.ts
+│   │   │   ├── services/     # Core services
+│   │   │   │   └── log.service.ts
+│   │   │   ├── app.module.ts
+│   │   │   └── main.ts
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── .env.example
+│   └── notifylog-ui/         # Next.js frontend dashboard
+│       ├── src/
+│       │   ├── app/
+│       │   │   ├── page.tsx
+│       │   │   ├── notifications/
+│       │   │   │   └── page.tsx
+│       │   │   ├── errors/
+│       │   │   │   └── page.tsx
+│       │   │   ├── layout.tsx
+│       │   │   └── globals.css
+│       │   ├── components/   # UI components
+│       │   │   ├── Header.tsx
+│       │   │   ├── NotificationTable.tsx
+│       │   │   └── ErrorTable.tsx
+│       │   └── lib/
+│       │       ├── api.ts    # API integration layer
+│       │       └── types.ts  # Shared types
+│       ├── public/           # Static assets
+│       ├── package.json
+│       └── next.config.js
+├── libs/                     # Shared libraries
+│   ├── logger/               # Winston logger (MongoDB transport)
+│   │   ├── src/
+│   │   │   ├── interfaces/
+│   │   │   │   └── log-repository.interface.ts
+│   │   │   ├── persistence/
+│   │   │   │   └── logger.schema.ts
+│   │   │   ├── repositories/
+│   │   │   │   └── log.repository.ts
+│   │   │   └── services/
+│   │   │       ├── logger.service.file.ts
+│   │   │       └── logger.service.db.ts
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── utils/                # Shared utilities
+│       ├── src/
+│       │   ├── helpers/
+│       │   │   ├── string.utils.ts
+│       │   │   └── validation.utils.ts
+│       │   ├── interceptors/
+│       │   │   └── logging.interceptor.ts
+│       │   └── constants/
+│       │       └── app.constants.ts
+│       ├── package.json
+│       └── tsconfig.json
+├── prisma/                   # Database layer
+│   ├── schema.prisma         # Prisma schema
+│   └── migrations/           # DB migration history
+├── docker/                   # Containerization
+│   ├── Dockerfile.api
+│   ├── Dockerfile.ui
+│   └── docker-compose.yml
+├── .github/                  # GitHub configurations
+│   ├── ISSUE_TEMPLATE/       # Issue templates
+│   └── workflows/
+│       └── ci.yml            # CI pipeline
+├── README.md
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+└── LICENSE
