@@ -1,231 +1,48 @@
-```markdown
-# NotifyLog
+# 📬 NotifyLog
 
-![Build Status](https://img.shields.io/github/workflow/status/your-username/notifylog/CI/main)
-![License](https://img.shields.io/github/license/your-username/notifylog)
-![GitHub Stars](https://img.shields.io/github/stars/your-username/notifylog)
+> A microservice-based Notification Logger built with NestJS and Next.js to send, track, and analyze Email, SMS, and Webhook messages.
 
-**NotifyLog** is a full-stack Node.js/NestJS microservice built with **clean architecture** and **SOLID principles**, designed for sending email/SMS notifications, logging messages/errors, and managing webhooks. It’s portable, modular, and paired with a Next.js/React frontend dashboard for visualizing notification and error log history. Features a **GraphQL API** for flexible querying.
+![CI](https://img.shields.io/github/actions/workflow/status/yourusername/notifylog/ci.yml?branch=main)
+![License](https://img.shields.io/github/license/yourusername/notifylog)
+![Node.js](https://img.shields.io/badge/node-%3E=18.x-green)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 
-## Table of Contents
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Clean Architecture](#clean-architecture)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Frontend Setup](#frontend-setup)
-- [API Documentation](#api-documentation)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
+---
 
-## Features
-- Send notifications (email/SMS) with a strategy pattern.
-- Centralized logging with Winston and MongoDB transport.
-- Webhook subscriptions for real-time event notifications.
-- Advanced log filtering and retrieval via GraphQL.
-- Next.js/React frontend dashboard for notification and error log history.
-- **GraphQL API** for flexible, type-safe queries.
-- Extensible and portable for integration into any project.
+## 🌟 Highlights
 
-## Tech Stack
-- **Backend**: Node.js, NestJS, GraphQL, Prisma, MongoDB, Winston, TypeScript
-- **Frontend**: Next.js, React, Tailwind CSS, React Query
-- **Tools**: Prisma, GraphQL Playground, Prettier, ESLint, Docker
+- 🚀 Microservice architecture using **NestJS**
+- 🌐 Clean and powerful **GraphQL API**
+- ✉️ Supports Email, SMS, and Webhook notifications
+- 📦 Centralized logging using **Winston** + **MongoDB**
+- 🎯 Extensible via plug-and-play notification providers
+- 🧪 Tested with **Jest** and designed for scalability
+- 💻 Lightweight **Next.js** frontend dashboard
 
-## Clean Architecture
-**NotifyLog** follows **clean architecture** and **SOLID principles**, ensuring modularity, testability, and maintainability. Key layers include:
+---
 
-- **Domain** (`apps/notifylog-api/src/domain/`): Defines interfaces (e.g., `INotificationRepository`, `IWebhookRepository`) for business logic, independent of frameworks (Single Responsibility).
-- **Application** (`apps/notifylog-api/src/application/`): Implements business rules via factories (`NotificationFactory`) and strategies (`EmailNotificationStrategy`, `SMSNotificationStrategy`) (Dependency Inversion).
-- **Infrastructure** (`apps/notifylog-api/src/infrastructure/`): Handles persistence (`prisma/schema.prisma`) and repositories (`NotificationRepository`, `WebhookRepository`) (Open/Closed).
-- **Presentation** (`apps/notifylog-api/src/presentation/`): Exposes GraphQL APIs through resolvers (`NotificationResolver`, `WebhookResolver`, `LogResolver`) (Interface Segregation).
+## 📖 Overview
 
-Shared utilities and logging are abstracted into `libs/` for reusability across apps.
+**NotifyLog** is a robust, plug-and-play Node.js-based notification microservice designed to handle multi-channel communication like Email, SMS, and Webhooks, all with centralized logging and GraphQL API support. Built using **NestJS** and **Next.js**, it follows clean architecture principles and is deployable in a distributed, containerized environment.
 
-## Project Structure
-```
+Use NotifyLog as:
+- A backend service for sending and tracking messages
+- A standalone logger for notification events
+- An integration-ready module in any SaaS or enterprise app
+
+---
+
+## 📂 Project Structure
+
+```bash
 notifylog/
-├── apps/                   # Monorepo applications
-│   ├── notifylog-api/        # NestJS microservice (GraphQL + Notification logic)
-│   │   ├── src/
-│   │   │   ├── application/  # Business logic
-│   │   │   │   ├── factories/
-│   │   │   │   │   └── notification.factory.ts
-│   │   │   │   └── strategies/
-│   │   │   │       ├── email-notification.strategy.ts
-│   │   │   │       └── sms-notification.strategy.ts
-│   │   │   ├── domain/       # Core entities/interfaces
-│   │   │   │   └── interfaces/
-│   │   │   │       ├── notification-repository.interface.ts
-│   │   │   │       └── webhook-repository.interface.ts
-│   │   │   ├── infrastructure/ # DB adapters
-│   │   │   │   └── repositories/
-│   │   │   │       ├── notification.repository.ts
-│   │   │   │       └── webhook.repository.ts
-│   │   │   ├── presentation/ # GraphQL resolvers
-│   │   │   │   └── resolvers/
-│   │   │   │       ├── notification.resolver.ts
-│   │   │   │       ├── webhook.resolver.ts
-│   │   │   │       └── log.resolver.ts
-│   │   │   ├── dto/          # Data transfer objects
-│   │   │   │   └── notification.dto.ts
-│   │   │   ├── services/     # Core services
-│   │   │   │   └── log.service.ts
-│   │   │   ├── app.module.ts
-│   │   │   └── main.ts
-│   │   ├── package.json
-│   │   ├── tsconfig.json
-│   │   └── .env.example
-│   └── notifylog-ui/         # Next.js frontend dashboard
-│       ├── src/
-│       │   ├── app/
-│       │   │   ├── page.tsx
-│       │   │   ├── notifications/
-│       │   │   │   └── page.tsx
-│       │   │   ├── errors/
-│       │   │   │   └── page.tsx
-│       │   │   ├── layout.tsx
-│       │   │   └── globals.css
-│       │   ├── components/   # UI components
-│       │   │   ├── Header.tsx
-│       │   │   ├── NotificationTable.tsx
-│       │   │   └── ErrorTable.tsx
-│       │   └── lib/
-│       │       ├── api.ts    # API integration layer
-│       │       └── types.ts  # Shared types
-│       ├── public/           # Static assets
-│       ├── package.json
-│       └── next.config.js
-├── libs/                     # Shared libraries
-│   ├── logger/               # Winston logger (MongoDB transport)
-│   │   ├── src/
-│   │   │   ├── interfaces/
-│   │   │   │   └── log-repository.interface.ts
-│   │   │   ├── persistence/
-│   │   │   │   └── logger.schema.ts
-│   │   │   ├── repositories/
-│   │   │   │   └── log.repository.ts
-│   │   │   └── services/
-│   │   │       ├── logger.service.file.ts
-│   │   │       └── logger.service.db.ts
-│   │   ├── package.json
-│   │   └── tsconfig.json
-│   └── utils/                # Shared utilities
-│       ├── src/
-│       │   ├── helpers/
-│       │   │   ├── string.utils.ts
-│       │   │   └── validation.utils.ts
-│       │   ├── interceptors/
-│       │   │   └── logging.interceptor.ts
-│       │   └── constants/
-│       │       └── app.constants.ts
-│       ├── package.json
-│       └── tsconfig.json
-├── prisma/                   # Database layer
-│   ├── schema.prisma         # Prisma schema
-│   └── migrations/           # DB migration history
-├── docker/                   # Containerization
-│   ├── Dockerfile.api
-│   ├── Dockerfile.ui
-│   └── docker-compose.yml
-├── .github/                  # GitHub configurations
-│   ├── ISSUE_TEMPLATE/       # Issue templates
-│   └── workflows/
-│       └── ci.yml            # CI pipeline
-├── README.md
-├── CONTRIBUTING.md
-├── CODE_OF_CONDUCT.md
-├── LICENSE
-```
-
-## Getting Started (Backend)
-### Prerequisites
-- Node.js (>=18.x)
-- MongoDB (local or Atlas)
-- Yarn or npm
-- Docker (optional)
-
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/notifylog.git
-   cd notifylog
-   ```
-2. Install dependencies:
-   ```bash
-   yarn install
-   ```
-3. Set up environment variables:
-   ```bash
-   cp apps/notifylog-api/.env.example apps/notifylog-api/.env
-   ```
-   Update `apps/notifylog-api/.env`:
-   ```env
-   DATABASE_URL=mongodb://localhost:27017/notifylog
-   ```
-4. Run Prisma migrations:
-   ```bash
-   cd apps/notifylog-api
-   npx prisma migrate dev
-   ```
-5. Start the backend:
-   ```bash
-   yarn workspace notifylog-api start:dev
-   ```
-
-### Docker Setup
-Run both backend and frontend with Docker:
-```bash
-docker-compose up --build
-```
-
-## Frontend Setup
-### Prerequisites
-- Node.js (>=18.x)
-- Backend running at `http://localhost:3000`
-
-### Installation
-1. Install frontend dependencies:
-   ```bash
-   cd apps/notifylog-ui
-   yarn install
-   ```
-2. Run the frontend:
-   ```bash
-   yarn dev
-   ```
-3. Access at `http://localhost:3001`.
-
-## API Documentation
-Explore the **GraphQL API** via **GraphQL Playground** at [http://localhost:3000/graphql](http://localhost:3000/graphql). Example query:
-```graphql
-mutation SendNotification {
-  sendNotification(input: {
-    type: "EMAIL"
-    to: "example@domain.com"
-    subject: "Welcome!"
-    message: "Hello from NotifyLog!"
-  }) {
-    success
-    messageId
-  }
-}
-```
-
-## Testing
-Run tests with Jest:
-```bash
-yarn test
-```
-Generate coverage:
-```bash
-yarn test:cov
-```
-
-## Contributing
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and [issues](https://github.com/your-username/notifylog/issues) for tasks (`good first issue`, `hacktoberfest`). Use issue templates in `.github/ISSUE_TEMPLATE`. Join our [Discord](https://discord.gg/your-invite-link).
-
-## License
-MIT License. See [LICENSE](LICENSE).
-```
+├── apps/
+│   ├── notifylog-api/     # NestJS microservice (GraphQL + Notification logic)
+│   └── notifylog-ui/      # Next.js frontend dashboard
+├── libs/
+│   ├── logger/            # Winston logger (MongoDB transport)
+│   └── utils/             # Shared helpers, interceptors, constants
+├── prisma/                # Prisma ORM config & schema
+├── docker/                # Docker & Docker Compose files
+├── .github/               # Issue templates & GitHub Actions
+└── README.md
