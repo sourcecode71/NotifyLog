@@ -37,12 +37,93 @@ Use NotifyLog as:
 ```bash
 notifylog/
 ├── apps/
-│   ├── notifylog-api/     # NestJS microservice (GraphQL + Notification logic)
-│   └── notifylog-ui/      # Next.js frontend dashboard
+│   ├── notifylog-api/
+│   │   ├── src/
+│   │   │   ├── application/
+│   │   │   │   ├── factories/
+│   │   │   │   │   └── notification.factory.ts
+│   │   │   │   └── strategies/
+│   │   │   │       ├── email-notification.strategy.ts
+│   │   │   │       └── sms-notification.strategy.ts
+│   │   │   ├── domain/
+│   │   │   │   └── interfaces/
+│   │   │   │       ├── notification-repository.interface.ts
+│   │   │   │       └── webhook-repository.interface.ts
+│   │   │   ├── infrastructure/
+│   │   │   │   └── repositories/
+│   │   │   │       ├── notification.repository.ts
+│   │   │   │       └── webhook.repository.ts
+│   │   │   ├── presentation/
+│   │   │   │   └── resolvers/
+│   │   │   │       ├── notification.resolver.ts
+│   │   │   │       ├── webhook.resolver.ts
+│   │   │   │       └── log.resolver.ts
+│   │   │   ├── dto/
+│   │   │   │   └── notification.dto.ts
+│   │   │   ├── services/
+│   │   │   │   └── log.service.ts
+│   │   │   ├── app.module.ts
+│   │   │   └── main.ts
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── .env.example
+│   └── notifylog-ui/
+│       ├── src/
+│       │   ├── app/
+│       │   │   ├── page.tsx
+│       │   │   ├── notifications/
+│       │   │   │   └── page.tsx
+│       │   │   ├── errors/
+│       │   │   │   └── page.tsx
+│       │   │   ├── layout.tsx
+│       │   │   └── globals.css
+│       │   ├── components/
+│       │   │   ├── Header.tsx
+│       │   │   ├── NotificationTable.tsx
+│       │   │   └── ErrorTable.tsx
+│       │   └── lib/
+│       │       ├── api.ts
+│       │       └── types.ts
+│       ├── public/
+│       ├── package.json
+│       └── next.config.js
 ├── libs/
-│   ├── logger/            # Winston logger (MongoDB transport)
-│   └── utils/             # Shared helpers, interceptors, constants
-├── prisma/                # Prisma ORM config & schema
-├── docker/                # Docker & Docker Compose files
-├── .github/               # Issue templates & GitHub Actions
-└── README.md
+│   ├── logger/
+│   │   ├── src/
+│   │   │   ├── interfaces/
+│   │   │   │   └── log-repository.interface.ts
+│   │   │   ├── persistence/
+│   │   │   │   └── logger.schema.ts
+│   │   │   ├── repositories/
+│   │   │   │   └── log.repository.ts
+│   │   │   └── services/
+│   │   │       ├── logger.service.file.ts
+│   │   │       └── logger.service.db.ts
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── utils/
+│       ├── src/
+│       │   ├── helpers/
+│       │   │   ├── string.utils.ts
+│       │   │   └── validation.utils.ts
+│       │   ├── interceptors/
+│       │   │   └── logging.interceptor.ts
+│       │   └── constants/
+│       │       └── app.constants.ts
+│       ├── package.json
+│       └── tsconfig.json
+├── prisma/
+│   ├── schema.prisma
+│   └── migrations/
+├── docker/
+│   ├── Dockerfile.api
+│   ├── Dockerfile.ui
+│   └── docker-compose.yml
+├── .github/
+│   ├── ISSUE\_TEMPLATE/
+│   └── workflows/
+│       └── ci.yml
+├── README.md
+├── CONTRIBUTING.md
+├── CODE\_OF\_CONDUCT.md
+├── LICENSE
