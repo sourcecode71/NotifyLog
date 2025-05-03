@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/github/license/your-username/NotifyLog)
 ![GitHub Stars](https://img.shields.io/github/stars/your-username/NotifyLog)
 
-**NotifyLog** is a full-stack Node.js/NestJS microservice for sending email/SMS notifications, logging messages/errors, and managing webhooks, paired with a Next.js/React frontend to visualize notification and error log history. Features an interactive **Swagger UI** for API exploration.
+**NotifyLog** is a full-stack Node.js/NestJS microservice built with clean architecture and SOLID principles, designed for sending email/SMS notifications, logging messages/errors, and managing webhooks. It’s portable, modular, and paired with a Next.js/React frontend to visualize notification and error log history. Features an interactive **Swagger UI** for API exploration.
 
 ## Table of Contents
 - [Features](#features)
