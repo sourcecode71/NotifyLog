@@ -1,98 +1,274 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 📬 NotifyLog
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+> A microservice-based Notification Logger built with NestJS and Next.js to send, track, and analyze Email, SMS, and Webhook messages.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![CI](https://img.shields.io/github/actions/workflow/status/yourusername/notifylog/ci.yml?branch=main)
+![License](https://img.shields.io/github/license/yourusername/notifylog)
+![Node.js](https://img.shields.io/badge/node-%3E=18.x-green)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🌟 Highlights
 
-## Project setup
+- 🚀 Microservice architecture using **NestJS**
+- 🌐 Clean and powerful **GraphQL API**
+- ✉️ Supports Email, SMS, and Webhook notifications
+- 📦 Centralized logging using **Winston** + **MongoDB**
+- 🎯 Extensible via plug-and-play notification providers
+- 🧪 Tested with **Jest** and designed for scalability
+- 💻 Lightweight **Next.js** frontend dashboard
 
-```bash
-$ npm install
-```
+---
 
-## Compile and run the project
+## 📖 Overview
 
-```bash
-# development
-$ npm run start
+**NotifyLog** is a robust, plug-and-play Node.js-based notification microservice designed to handle multi-channel communication like Email, SMS, and Webhooks, all with centralized logging and GraphQL API support. Built using **NestJS** and **Next.js**, it follows clean architecture principles and is deployable in a distributed, containerized environment.
 
-# watch mode
-$ npm run start:dev
+Use NotifyLog as:
+- A backend service for sending and tracking messages
+- A standalone logger for notification events
+- An integration-ready module in any SaaS or enterprise app
 
-# production mode
-$ npm run start:prod
-```
+---
+Sure! Here's a clean and properly formatted `README.md` file that includes all the content you provided:
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+```markdown
+# NotifyLog 🚨
 
-# e2e tests
-$ npm run test:e2e
+A notification management system with logging, monitoring, and multi-channel delivery support.
 
-# test coverage
-$ npm run test:cov
-```
+---
 
-## Deployment
+## ⚙️ Setup & Installation
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### 🔧 Prerequisites
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- **Node.js** ≥ 18.x
+- **Yarn** or **npm**
+- **MongoDB** or **MongoDB Atlas**
+- **Docker** (optional)
+
+---
+
+## 🚀 Run Locally
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Clone repo
+git clone https://github.com/yourusername/notifylog.git && cd notifylog
+
+# Install dependencies
+yarn install
+
+# Setup environment variables
+cp .env.example .env
+# Fill in your email/SMS API keys, Mongo URI, etc.
+
+# Start backend
+yarn start:dev:api
+
+# Start frontend
+yarn start:dev:ui
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## 🐳 Run with Docker
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+docker-compose up --build
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+## 📌 Features
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+✅ GraphQL API to manage notifications, logs, and subscriptions  
+📧 Email Module (send emails using SendGrid/Mailgun)  
+📲 SMS Module (Twilio integration)  
+🔔 Webhook Support (event-based triggers to external services)  
+📝 MongoDB Logging with Winston (request/response/errors)  
+🧩 Extensible Providers (add your own integrations easily)  
+💻 Next.js UI for monitoring and manual message dispatch  
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 🔬 Example GraphQL Query
 
-## License
+```graphql
+mutation SendEmail {
+  sendNotification(input: {
+    type: "EMAIL",
+    to: "example@domain.com",
+    subject: "Welcome!",
+    message: "Hello from NotifyLog!"
+  }) {
+    success
+    messageId
+  }
+}
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+yarn test
+
+# Run coverage
+yarn test:cov
+```
+
+---
+
+## 📈 Roadmap
+
+- WebSocket-based real-time logs  
+- Retry strategy for failed webhook calls  
+- Admin dashboard analytics  
+- SMTP transport fallback  
+- Mobile-friendly UI  
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions of all kinds!
+
+1. Fork the repo
+2. Create your feature branch: `git checkout -b feat/amazing-feature`
+3. Commit your changes: `git commit -am 'Add amazing feature'`
+4. Push to the branch: `git push origin feat/amazing-feature`
+5. Open a pull request
+
+For more info, see [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+## 🐛 Issue Templates
+
+Need to report a bug or request a feature? Use the templates in `.github/ISSUE_TEMPLATE`:
+
+- 🐞 Bug Report  
+- ✨ Feature Request  
+- 📚 Documentation Update  
+- 🆕 Good First Issue  
+
+---
+
+## 🛡 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 📣 Contact & Credits
+
+Maintained by **Your Name** – feel free to connect on [LinkedIn] or [Twitter].
+
+Special thanks to all contributors 💖
+```
+
+---
+
+Let me know if you'd like this customized with your actual GitHub username, social links, or any branding tweaks!
+
+## 📂 Project Structure
+
+```bash
+notifylog/
+├── apps/
+│   ├── notifylog-api/
+│   │   ├── src/
+│   │   │   ├── application/
+│   │   │   │   ├── factories/
+│   │   │   │   │   └── notification.factory.ts
+│   │   │   │   └── strategies/
+│   │   │   │       ├── email-notification.strategy.ts
+│   │   │   │       └── sms-notification.strategy.ts
+│   │   │   ├── domain/
+│   │   │   │   └── interfaces/
+│   │   │   │       ├── notification-repository.interface.ts
+│   │   │   │       └── webhook-repository.interface.ts
+│   │   │   ├── infrastructure/
+│   │   │   │   └── repositories/
+│   │   │   │       ├── notification.repository.ts
+│   │   │   │       └── webhook.repository.ts
+│   │   │   ├── presentation/
+│   │   │   │   └── resolvers/
+│   │   │   │       ├── notification.resolver.ts
+│   │   │   │       ├── webhook.resolver.ts
+│   │   │   │       └── log.resolver.ts
+│   │   │   ├── dto/
+│   │   │   │   └── notification.dto.ts
+│   │   │   ├── services/
+│   │   │   │   └── log.service.ts
+│   │   │   ├── app.module.ts
+│   │   │   └── main.ts
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── .env.example
+│   └── notifylog-ui/
+│       ├── src/
+│       │   ├── app/
+│       │   │   ├── page.tsx
+│       │   │   ├── notifications/
+│       │   │   │   └── page.tsx
+│       │   │   ├── errors/
+│       │   │   │   └── page.tsx
+│       │   │   ├── layout.tsx
+│       │   │   └── globals.css
+│       │   ├── components/
+│       │   │   ├── Header.tsx
+│       │   │   ├── NotificationTable.tsx
+│       │   │   └── ErrorTable.tsx
+│       │   └── lib/
+│       │       ├── api.ts
+│       │       └── types.ts
+│       ├── public/
+│       ├── package.json
+│       └── next.config.js
+├── libs/
+│   ├── logger/
+│   │   ├── src/
+│   │   │   ├── interfaces/
+│   │   │   │   └── log-repository.interface.ts
+│   │   │   ├── persistence/
+│   │   │   │   └── logger.schema.ts
+│   │   │   ├── repositories/
+│   │   │   │   └── log.repository.ts
+│   │   │   └── services/
+│   │   │       ├── logger.service.file.ts
+│   │   │       └── logger.service.db.ts
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── utils/
+│       ├── src/
+│       │   ├── helpers/
+│       │   │   ├── string.utils.ts
+│       │   │   └── validation.utils.ts
+│       │   ├── interceptors/
+│       │   │   └── logging.interceptor.ts
+│       │   └── constants/
+│       │       └── app.constants.ts
+│       ├── package.json
+│       └── tsconfig.json
+├── prisma/
+│   ├── schema.prisma
+│   └── migrations/
+├── docker/
+│   ├── Dockerfile.api
+│   ├── Dockerfile.ui
+│   └── docker-compose.yml
+├── .github/
+│   ├── ISSUE\_TEMPLATE/
+│   └── workflows/
+│       └── ci.yml
+├── README.md
+├── CONTRIBUTING.md
+├── CODE\_OF\_CONDUCT.md
+├── LICENSE
