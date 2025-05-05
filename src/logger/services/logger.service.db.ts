@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ILogRepository } from '../domain/interfaces/log-repository.interface';
+import { LogEntryDto } from '../infrastructure/persistence/dto/log-entry-dto';
 
 @Injectable()
 export class LoggerServiceDb {
@@ -7,23 +8,8 @@ export class LoggerServiceDb {
     @Inject('ILogRepository') private readonly logRepository: ILogRepository,
   ) {}
 
-  async error(
-    message: string,
-    trace?: string,
-    metadata?: {
-      recipient?: string;
-      notificationType?: string;
-      mediaType?: string;
-      context?: string;
-    },
-  ) {
-    await this.logRepository.saveLog({
-      level: 'error',
-      message,
-      trace,
-      metadata,
-      timestamp: new Date(),
-    });
+  async error(logEntryDto: LogEntryDto) {
+    await this.logRepository.saveLog(logEntryDto);
   }
   async getLogsByFilter(
     level: string,
@@ -42,7 +28,6 @@ export class LoggerServiceDb {
         `No logs found. Level: ${level}, Context: ${context}, Page: ${page}, Limit: ${limit}`,
       );
     }
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return logs;
   }
   async getLogById(id: string) {
