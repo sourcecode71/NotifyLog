@@ -2,12 +2,7 @@ import { Body, Controller, Get, HttpStatus, Post, Query } from '@nestjs/common';
 import { Inject } from '@nestjs/common';
 import { IWebhookRepository } from '../../domain/interfaces/webhook-repository.interface';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-
-class CreateWebhookDto {
-  url: string;
-  event: string;
-  ownerId: string;
-}
+import { CreateWebhookDto } from '../dtos/webhook.dto';
 
 @ApiTags('Webhooks')
 @Controller('api/webhooks')
