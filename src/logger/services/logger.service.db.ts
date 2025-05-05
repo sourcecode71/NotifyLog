@@ -37,7 +37,7 @@ export class LoggerServiceDb {
       page,
       limit,
     );
-    if (!logs || logs.length === 0) {
+    if (!logs || logs.logs.length === 0) {
       throw new Error(
         `No logs found. Level: ${level}, Context: ${context}, Page: ${page}, Limit: ${limit}`,
       );
