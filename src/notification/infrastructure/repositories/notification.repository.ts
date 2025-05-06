@@ -11,10 +11,19 @@ export class NotificationRepository implements INotificationRepository {
     @InjectModel('Notification')
     private readonly notificationModel: Model<NotificationDocument>,
   ) {}
+
   findById(id: string): Promise<Notification | null> {
     throw new Error(`Method not implemented. ID: ${id}`);
   }
 
+  async findAll(skip: number, limit: number): Promise<Notification[]> {
+    const docs = await this.notificationModel
+      .find()
+      .skip(skip)
+      .limit(limit)
+      .exec();
+    return docs.map((doc) => this.toEntity(doc));
+  }
   async save(notification: Notification): Promise<Notification> {
     const doc = new this.notificationModel(notification);
     const saved = await doc.save();

@@ -14,4 +14,6 @@ export interface INotificationRepository {
    * @returns A promise that resolves to the found notification entity, or null if not found.
    */
   findById(id: string): Promise<Notification | null>;
+
+  findAll(skip: number, limit: number): Promise<Notification[]>;
 }

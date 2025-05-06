@@ -16,19 +16,20 @@ import {
   ApiQuery,
 } from '@nestjs/swagger';
 import { NotificationFactory } from '../../application/factories/notification.factory';
-import { NotificationValidator } from '../../application/validators/notification.validator';
-import { SendNotificationDto } from '../dtos/send-notification.dto';
+import {
+  SendNotificationDto,
+  SendNotificationSchema,
+} from '../dtos/send-notification.dto';
 import { Notification } from '../../domain/entities/notification.entity';
 import { INotificationStrategy } from '../../domain/interfaces/notification-strategy.interface';
 import { INotificationRepository } from '../../domain/interfaces/notification-repository.interface';
 import { LoggerServiceFile } from '../../../logger/services/logger.service.file';
 import { LoggerServiceDb } from '../../../logger/services/logger.service.db';
-import { number } from 'joi';
+import { JoiValidationPipe } from '../../../config/validation/joi-validation.pipe';
 
 @ApiTags('Notifications')
 @Controller('api/notifications')
 export class NotificationController {
-  notificationModel: import('mongoose').Model<Notification>;
   constructor(
     private readonly notificationFactory: NotificationFactory,
     @Inject('INotificationRepository')
@@ -52,14 +53,10 @@ export class NotificationController {
     status: 400,
     description: 'Validation failed',
   })
-  async send(@Body() dto: SendNotificationDto): Promise<void> {
-    // Validate input
-    const { error } = NotificationValidator.validateCreateNotification(dto);
-    if (error) {
-      this.logger.error(`Validation failed: ${error.message}`);
-      throw new Error(`Validation failed: ${error.message}`);
-    }
-
+  async send(
+    @Body(new JoiValidationPipe(SendNotificationSchema))
+    dto: SendNotificationDto,
+  ): Promise<void> {
     // Create notification entity
     const notification = new Notification(
       dto.recipient,
@@ -87,11 +84,15 @@ export class NotificationController {
 
     await this.loggerDb.error({
       level: 'info',
-      message: 'Exception occurred while sending notification',
+      message: `Notification (${dto.notificationType}) sent to ${dto.recipient} via ${dto.mediaType}`,
       timestamp: new Date(),
     });
   }
+
   @Get('history')
+  @ApiOperation({
+    summary: 'Retrieve notification history',
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Notification history retrieved',
@@ -113,17 +114,13 @@ export class NotificationController {
     @Query('limit') limit = 10,
   ) {
     const skip = (page - 1) * limit;
-    const notifications = await this.notificationModel
-      .find()
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .exec();
-    const total = await this.notificationModel.countDocuments().exec();
+    const notifications: Notification[] =
+      await this.notificationRepository.findAll(skip, limit);
+    const total = notifications.length;
     return {
       data: notifications,
-      total: number,
-      page: number,
+      total,
+      page,
       totalPages: Math.ceil(total / limit),
     };
   }
