@@ -29,8 +29,10 @@ async function bootstrap() {
 bootstrap().catch(async (error: Error) => {
   const app = await NestFactory.create(AppModule);
   const loggerDb = app.get(LoggerServiceDb);
-  await loggerDb.error('Error during application bootstrap', error.stack, {
-    context: 'bootstrap',
+  await loggerDb.error({
+    message: 'Error during application bootstrap',
+    level: 'error',
+    timestamp: new Date(),
   });
   console.log('Error during application bootstrap:', error);
   process.exit(1);

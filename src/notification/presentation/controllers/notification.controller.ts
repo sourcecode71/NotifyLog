@@ -84,7 +84,12 @@ export class NotificationController {
     this.logger.log(
       `Notification (${dto.notificationType}) sent to ${dto.recipient} via ${dto.mediaType}`,
     );
-    await this.loggerDb.error(`Exception occurred while sending notification`);
+
+    await this.loggerDb.error({
+      level: 'info',
+      message: 'Exception occurred while sending notification',
+      timestamp: new Date(),
+    });
   }
   @Get('history')
   @ApiResponse({
