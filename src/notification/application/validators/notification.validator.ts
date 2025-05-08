@@ -1,9 +1,7 @@
 import * as Joi from 'joi';
 import { NotificationChannel } from '../../../config/notification.config';
-import {
-  SendNotificationDto,
-  NotificationType,
-} from '../../presentation/dtos/send-notification.dto';
+import { SendNotificationDto } from '../../presentation/dtos/send-notification.dto';
+import { NotificationType } from '../../../config/notification.config';
 
 export class NotificationValidator {
   static createNotificationSchema = Joi.object<SendNotificationDto>({

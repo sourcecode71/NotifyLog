@@ -5,7 +5,7 @@ import { NotificationFactory } from '../../infrastructure/factories/notification
 import { NotificationChannel } from '../../../config/notification.config';
 import { NotificationRepository } from '../../infrastructure/repositories/notification.repository';
 import { NotificationValidator } from '../validators/notification.validator';
-import { NotificationType } from '../../presentation/dtos/send-notification.dto';
+import { NotificationType } from '../../../config/notification.config';
 
 @Injectable()
 export class SendNotificationUseCase {
