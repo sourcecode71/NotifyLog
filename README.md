@@ -184,91 +184,52 @@ notifylog/
 ├── apps/
 │   ├── notifylog-api/
 │   │   ├── src/
-│   │   │   ├── application/
-│   │   │   │   ├── factories/
-│   │   │   │   │   └── notification.factory.ts
-│   │   │   │   └── strategies/
-│   │   │   │       ├── email-notification.strategy.ts
-│   │   │   │       └── sms-notification.strategy.ts
-│   │   │   ├── domain/
-│   │   │   │   └── interfaces/
-│   │   │   │       ├── notification-repository.interface.ts
-│   │   │   │       └── webhook-repository.interface.ts
-│   │   │   ├── infrastructure/
-│   │   │   │   └── repositories/
-│   │   │   │       ├── notification.repository.ts
-│   │   │   │       └── webhook.repository.ts
-│   │   │   ├── presentation/
-│   │   │   │   └── resolvers/
-│   │   │   │       ├── notification.resolver.ts
-│   │   │   │       ├── webhook.resolver.ts
-│   │   │   │       └── log.resolver.ts
-│   │   │   ├── dto/
-│   │   │   │   └── notification.dto.ts
-│   │   │   ├── services/
-│   │   │   │   └── log.service.ts
+│   │   │   ├── config/
+│   │   │   │   └── notification.config.ts  # Shared enums (NotificationType, NotificationChannel)
+│   │   │   ├── common/
+│   │   │   │   └── validation/
+│   │   │   │       └── joi-validation.pipe.ts
+│   │   │   ├── logger/
+│   │   │   │   ├── domain/
+│   │   │   │   ├── infrastructure/
+│   │   │   │   ├── presentation/
+│   │   │   │   └── application/
+│   │   │   ├── notification/
+│   │   │   │   ├── application/
+│   │   │   │   │   ├── factories/
+│   │   │   │   │   │   └── notification.factory.ts
+│   │   │   │   │   └── strategies/
+│   │   │   │   │       ├── email-notification.strategy.ts
+│   │   │   │   │       └── sms-notification.strategy.ts
+│   │   │   │   ├── domain/
+│   │   │   │   │   ├── entities/
+│   │   │   │   │   │   └── notification.entity.ts
+│   │   │   │   │   ├── errors/
+│   │   │   │   │   │   └── notification.error.ts  # Example error class
+│   │   │   │   │   └── interfaces/
+│   │   │   │   │       ├── notification-repository.interface.ts
+│   │   │   │   │       ├── notification-strategy.interface.ts
+│   │   │   │   │       └── webhook-repository.interface.ts
+│   │   │   │   ├── infrastructure/
+│   │   │   │   │   ├── repositories/
+│   │   │   │   │   │   ├── notification.repository.ts
+│   │   │   │   │   │   └── webhook.repository.ts
+│   │   │   │   │   └── persistence/
+│   │   │   │   │       ├── mongodb/
+│   │   │   │   │       │   └── notification.schema.ts
+│   │   │   │   │       └── postgresql/
+│   │   │   │   │           └── webhook.schema.ts  # Example for PostgreSQL
+│   │   │   │   ├── presentation/
+│   │   │   │   │   ├── controllers/
+│   │   │   │   │   │   ├── notification.controller.ts
+│   │   │   │   │   │   └── webhook.controller.ts
+│   │   │   │   │   └── dto/
+│   │   │   │   │       ├── send-notification.dto.ts
+│   │   │   │   │       └── create-webhook.dto.ts
 │   │   │   ├── app.module.ts
-│   │   │   └── main.ts
+│   │   │   ├── main.ts
+│   │   │   └── services/
+│   │   │       └── log.service.ts
 │   │   ├── package.json
 │   │   ├── tsconfig.json
 │   │   └── .env.example
-│   └── notifylog-ui/
-│       ├── src/
-│       │   ├── app/
-│       │   │   ├── page.tsx
-│       │   │   ├── notifications/
-│       │   │   │   └── page.tsx
-│       │   │   ├── errors/
-│       │   │   │   └── page.tsx
-│       │   │   ├── layout.tsx
-│       │   │   └── globals.css
-│       │   ├── components/
-│       │   │   ├── Header.tsx
-│       │   │   ├── NotificationTable.tsx
-│       │   │   └── ErrorTable.tsx
-│       │   └── lib/
-│       │       ├── api.ts
-│       │       └── types.ts
-│       ├── public/
-│       ├── package.json
-│       └── next.config.js
-├── libs/
-│   ├── logger/
-│   │   ├── src/
-│   │   │   ├── interfaces/
-│   │   │   │   └── log-repository.interface.ts
-│   │   │   ├── persistence/
-│   │   │   │   └── logger.schema.ts
-│   │   │   ├── repositories/
-│   │   │   │   └── log.repository.ts
-│   │   │   └── services/
-│   │   │       ├── logger.service.file.ts
-│   │   │       └── logger.service.db.ts
-│   │   ├── package.json
-│   │   └── tsconfig.json
-│   └── utils/
-│       ├── src/
-│       │   ├── helpers/
-│       │   │   ├── string.utils.ts
-│       │   │   └── validation.utils.ts
-│       │   ├── interceptors/
-│       │   │   └── logging.interceptor.ts
-│       │   └── constants/
-│       │       └── app.constants.ts
-│       ├── package.json
-│       └── tsconfig.json
-├── prisma/
-│   ├── schema.prisma
-│   └── migrations/
-├── docker/
-│   ├── Dockerfile.api
-│   ├── Dockerfile.ui
-│   └── docker-compose.yml
-├── .github/
-│   ├── ISSUE\_TEMPLATE/
-│   └── workflows/
-│       └── ci.yml
-├── README.md
-├── CONTRIBUTING.md
-├── CODE\_OF\_CONDUCT.md
-├── LICENSE
