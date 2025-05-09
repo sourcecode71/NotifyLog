@@ -6,7 +6,10 @@ import { LoggerServiceFile } from '../../src/logger/services/logger.service.file
 import { LoggerServiceDb } from '../../src/logger/services/logger.service.db';
 import { SendNotificationDto } from '../../src/notification/presentation/dtos/send-notification.dto';
 import { Notification } from '../../src/notification/domain/entities/notification.entity';
-import { NotificationChannel, NotificationType } from '../../src/config/notification.config';
+import {
+  NotificationChannel,
+  NotificationType,
+} from '../../src/config/notification.config';
 
 describe('NotificationController', () => {
   let controller: NotificationController;
@@ -18,7 +21,6 @@ describe('NotificationController', () => {
     'Test Subject',
     'Test Body',
     NotificationChannel.EMAIL,
-    NotificationType.ADMISSION_ID,
     new Date(),
   );
 
@@ -83,7 +85,11 @@ describe('NotificationController', () => {
     it('should send notification and log successfully', async () => {
       await controller.send(mockSendDto);
 
-      expect(factory.createStrategy).toHaveBeenCalledWith(mockSendDto.mediaType);
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(factory.createStrategy).toHaveBeenCalledWith(
+        mockSendDto.mediaType,
+      );
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(repository.save).toHaveBeenCalledWith(expect.any(Notification));
       expect(mockStrategy.send).toHaveBeenCalledWith(expect.any(Notification));
     });
@@ -102,6 +108,7 @@ describe('NotificationController', () => {
       jest.spyOn(repository, 'findAll');
       const result = await controller.getNotificationHistory(1, 10);
 
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(repository.findAll).toHaveBeenCalledWith(0, 10);
       expect(result).toEqual({
         data: [mockNotification],
@@ -112,9 +119,12 @@ describe('NotificationController', () => {
     });
 
     it('should handle custom pagination', async () => {
-      jest.spyOn(repository, 'findAll').mockResolvedValue([mockNotification, mockNotification]);
+      jest
+        .spyOn(repository, 'findAll')
+        .mockResolvedValue([mockNotification, mockNotification]);
       const result = await controller.getNotificationHistory(2, 5);
 
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(repository.findAll).toHaveBeenCalledWith(5, 5);
       expect(result).toEqual({
         data: [mockNotification, mockNotification],
