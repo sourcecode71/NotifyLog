@@ -14,7 +14,7 @@
     "dev": "concurrently \"npm run start:dev\" \"npm run sync\"",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
+    "test": "jest --maxWorkers=50%",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage"
   },
