@@ -11,7 +11,6 @@ export class NotificationRepository implements INotificationRepository {
     @InjectModel('Notification')
     private readonly notificationModel: Model<NotificationDocument>,
   ) {}
-
   findById(id: string): Promise<Notification | null> {
     throw new Error(`Method not implemented. ID: ${id}`);
   }
@@ -28,6 +27,10 @@ export class NotificationRepository implements INotificationRepository {
     const doc = new this.notificationModel(notification);
     const saved = await doc.save();
     return this.toEntity(saved);
+  }
+
+  async deleteById(id: string): Promise<void> {
+    await this.notificationModel.findByIdAndDelete(id).exec();
   }
 
   private toEntity(doc: NotificationDocument): Notification {

@@ -9,6 +9,15 @@ export interface ILogRepository {
     context: string | undefined,
     page: number,
     limit: number,
-  ): Promise<{ logs: Logger[]; total: number }>;
+  ): Promise<{
+    length: number;
+    logs: Logger[];
+    total: number;
+  }>;
   saveLog(log: LogEntryDto): Promise<Logger>; // Fix: Return `Logger` and use camelCase param
+  deleteLogById(_id: string): Promise<void>; // Fix: Use camelCase param
+  getLogStats(
+    level: string | undefined,
+    context: string | undefined,
+  ): Promise<any>; // Fix: Return `any` and use camelCase params
 }

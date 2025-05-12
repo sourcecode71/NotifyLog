@@ -37,4 +37,19 @@ export class LoggerServiceDb {
     }
     return log;
   }
+
+  async deleteLogById(id: string) {
+    const log = await this.logRepository.findLogById(id);
+    if (!log) {
+      throw new Error(`Log with ID: ${id} not found`);
+    }
+    await this.logRepository.deleteLogById(id);
+  }
+
+  async getLogStats(
+    level: string | undefined,
+    context: string | undefined,
+  ): Promise<any> {
+    return await this.logRepository.getLogStats(level, context);
+  }
 }

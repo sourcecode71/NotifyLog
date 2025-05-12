@@ -16,4 +16,6 @@ export interface INotificationRepository {
   findById(id: string): Promise<Notification | null>;
 
   findAll(skip: number, limit: number): Promise<Notification[]>;
+
+  deleteById(id: string): Promise<void>;
 }

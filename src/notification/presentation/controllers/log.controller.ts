@@ -1,6 +1,22 @@
-import { Controller, Get, HttpStatus, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Query,
+  Delete,
+  HttpCode,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiQuery,
+  ApiTags,
+  ApiParam,
+} from '@nestjs/swagger';
 import { LoggerServiceDb } from '../../../logger/services/logger.service.db';
-import { ApiOperation, ApiResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Logs')
 @Controller('api/logs')
@@ -35,14 +51,28 @@ export class LogController {
     type: Number,
     description: 'Items per page (default: 10)',
   })
-  getLogs(
+  async getLogs(
     @Query('level') level: string,
     @Query('context') context?: string,
     @Query('page') page = 1,
     @Query('limit') limit = 10,
   ) {
-    const logs = this.logService.getLogsByFilter(level, context, page, limit);
-    return logs;
+    const logsResult = await this.logService.getLogsByFilter(
+      level,
+      context,
+      page,
+      limit,
+    );
+    const logs: unknown = logsResult;
+    if (!Array.isArray(logs)) {
+      throw new BadRequestException('Logs result is not an array');
+    }
+    return {
+      data: logs,
+      total: logs.length,
+      page,
+      totalPages: Math.ceil(logs.length / limit),
+    };
   }
 
   @Get(':id')
@@ -51,10 +81,92 @@ export class LogController {
     status: HttpStatus.OK,
     description: 'Log retrieved successfully',
   })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    description: 'Log ID',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Log not found',
+  })
   async getLogById(@Param('id') id: string) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const log = await this.logService.getLogById(id);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    if (!log) {
+      throw new NotFoundException(`Log with ID ${id} not found`);
+    }
     return { data: log };
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Delete a specific log by ID' })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    description: 'Log ID',
+  })
+  @ApiResponse({
+    status: 204,
+    description: 'Log deleted successfully',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Log not found',
+  })
+  async deleteLogById(@Param('id') id: string): Promise<void> {
+    const log = await this.logService.getLogById(id);
+    if (!log) {
+      throw new NotFoundException(`Log with ID ${id} not found`);
+    }
+    await this.logService.deleteLogById(id);
+  }
+
+  @Delete()
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Delete logs by filter' })
+  @ApiQuery({
+    name: 'level',
+    required: true,
+    description: 'Log level (e.g., info, error)',
+  })
+  @ApiQuery({
+    name: 'context',
+    required: false,
+    description: 'Context (e.g., NotificationController)',
+  })
+  @ApiResponse({
+    status: 204,
+    description: 'Logs deleted successfully',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'No logs found for the given filter',
+  })
+  @Get('stats')
+  @ApiOperation({ summary: 'Get log statistics' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Log statistics retrieved successfully',
+  })
+  @ApiQuery({
+    name: 'level',
+    required: false,
+    description: 'Filter by log level (e.g., info, error)',
+  })
+  @ApiQuery({
+    name: 'context',
+    required: false,
+    description: 'Filter by context (e.g., NotificationController)',
+  })
+  async getLogStats(
+    @Query('level') level?: string,
+    @Query('context') context?: string,
+  ): Promise<{ data: Record<string, unknown> }> {
+    const stats = (await this.logService.getLogStats(level, context)) as Record<
+      string,
+      unknown
+    >;
+    return { data: stats };
   }
 }
