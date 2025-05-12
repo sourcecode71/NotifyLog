@@ -12,7 +12,15 @@ export class NotificationRepository implements INotificationRepository {
     private readonly notificationModel: Model<NotificationDocument>,
   ) {}
   findById(id: string): Promise<Notification | null> {
-    throw new Error(`Method not implemented. ID: ${id}`);
+    return this.notificationModel
+      .findById(id)
+      .exec()
+      .then((doc) => {
+        if (!doc) {
+          return null;
+        }
+        return this.toEntity(doc);
+      });
   }
 
   async findAll(skip: number, limit: number): Promise<Notification[]> {
