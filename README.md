@@ -83,6 +83,8 @@ docker-compose up --build
 
 ---
 
+
+
 ## 📌 Features
 
 ✅ GraphQL API to manage notifications, logs, and subscriptions  
@@ -122,7 +124,8 @@ yarn test
 # Run coverage
 yarn test:cov
 ```
-
+###  Test Result
+- **[NotifyLog](https://github.com/sourcecode71/NotifyLog)**: Notification service built with NestJS. View my [Jest Test Report](https://sourcecode71.github.io/NotifyLog) for automated test results!
 ---
 
 ## 📈 Roadmap
