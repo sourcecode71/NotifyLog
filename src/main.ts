@@ -4,6 +4,14 @@ import { AllExceptionsFilter } from './filters/all-exceptions.filter';
 import { LoggerServiceFile } from './logger/services/logger.service.file';
 import { LoggerServiceDb } from './logger/services/logger.service.db';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+
+// 1. Load .env file manually first (as backup)
+const envPath = path.resolve(__dirname, '../.env');
+dotenv.config({ path: envPath });
+
+console.log('Environment variables loaded from:', process.env.MONGO_URL);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

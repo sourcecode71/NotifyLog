@@ -162,10 +162,10 @@ export class LogController {
   async getLogStats(
     @Query('level') level?: string,
     @Query('context') context?: string,
-  ): Promise<{ data: Record<string, unknown> }> {
+  ): Promise<{ data: Record<string, string> }> {
     const stats = (await this.logService.getLogStats(level, context)) as Record<
       string,
-      unknown
+      string
     >;
     return { data: stats };
   }
