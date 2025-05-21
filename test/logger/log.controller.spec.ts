@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { LogController } from './log.controller';
-import { LoggerServiceDb } from '../../../logger/services/logger.service.db';
+import { LogController } from '../../src/notification/presentation/controllers/log.controller';
+import { LoggerServiceDb } from '../../src/logger/services/logger.service.db';
 import { NotFoundException } from '@nestjs/common';
 import { Logger } from 'src/logger/infrastructure/persistence/mongoose/logger.schema';
-import { PaginatedLogs } from '../../../logger/domain/interfaces/log-model.interface';
+import { PaginatedLogs } from '../../src/logger/domain/interfaces/log-model.interface';
 
 describe('LogController', () => {
   let controller: LogController;
