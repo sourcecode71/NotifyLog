@@ -7,7 +7,6 @@ import {
   Delete,
   HttpCode,
   NotFoundException,
-  BadRequestException,
 } from '@nestjs/common';
 import {
   ApiOperation,
@@ -57,21 +56,18 @@ export class LogController {
     @Query('page') page = 1,
     @Query('limit') limit = 10,
   ) {
-    const logsResult = await this.logService.getLogsByFilter(
+    const { logs, total } = await this.logService.getLogsByFilter(
       level,
       context,
       page,
       limit,
     );
-    const logs: unknown = logsResult;
-    if (!Array.isArray(logs)) {
-      throw new BadRequestException('Logs result is not an array');
-    }
+
     return {
       data: logs,
-      total: logs.length,
+      total,
       page,
-      totalPages: Math.ceil(logs.length / limit),
+      totalPages: Math.ceil(total / limit),
     };
   }
 

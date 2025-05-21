@@ -35,6 +35,7 @@ export class SendNotificationDto {
     enum: NotificationType,
   })
   notificationType: NotificationType;
+  createdAt: Date;
 }
 
 export const SendNotificationSchema = Joi.object({

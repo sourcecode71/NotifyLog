@@ -21,6 +21,7 @@ describe('NotificationController', () => {
     'Test Subject',
     'Test Body',
     NotificationChannel.EMAIL,
+    NotificationType.ADMISSION_ID,
     new Date(),
   );
 
@@ -30,10 +31,11 @@ describe('NotificationController', () => {
     body: 'Test Body',
     mediaType: NotificationChannel.EMAIL,
     notificationType: NotificationType.ADMISSION_ID,
+    createdAt: new Date(),
   };
 
   const mockStrategy = {
-    send: jest.fn().mockResolvedValue(undefined),
+    send: jest.fn().mockResolvedValue('EMAIL'),
   };
 
   beforeEach(async () => {

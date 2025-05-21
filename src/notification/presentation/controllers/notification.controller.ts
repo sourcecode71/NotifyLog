@@ -72,21 +72,13 @@ export class NotificationController {
     dto: SendNotificationDto,
   ): Promise<void> {
     // Create notification entity
-    const notification = new Notification(
-      dto.recipient,
-      dto.subject,
-      dto.body,
-      dto.mediaType,
-      new Date(),
-    );
 
-    console.log('notification strategy creation started');
+    const notification = Notification.createFromDto(dto);
+
     // Send notification
     const strategy: INotificationStrategy =
       this.notificationFactory.createStrategy(dto.mediaType);
     await strategy.send(notification);
-
-    console.log('notification strategy creation ended');
 
     // Save notification after successful send
     await this.notificationRepository.save(notification);
@@ -225,11 +217,13 @@ export class NotificationController {
         notificationDto.subject,
         notificationDto.body,
         notificationDto.mediaType,
+        notificationDto.notificationType,
         new Date(),
       );
 
       const strategy: INotificationStrategy =
         this.notificationFactory.createStrategy(notificationDto.mediaType);
+
       await strategy.send(notification);
       await this.notificationRepository.save(notification);
 

@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ILogRepository } from '../domain/interfaces/log-repository.interface';
 import { LogEntryDto } from '../infrastructure/persistence/dto/log-entry-dto';
+import { PaginatedLogs } from '../domain/interfaces/log-model.interface';
 
 @Injectable()
 export class LoggerServiceDb {
@@ -16,7 +17,7 @@ export class LoggerServiceDb {
     context: string | undefined,
     page: number,
     limit: number,
-  ) {
+  ): Promise<PaginatedLogs> {
     const logs = await this.logRepository.findLogsByFilter(
       level,
       context,

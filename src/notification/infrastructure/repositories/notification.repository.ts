@@ -33,6 +33,7 @@ export class NotificationRepository implements INotificationRepository {
   }
   async save(notification: Notification): Promise<Notification> {
     const doc = new this.notificationModel(notification);
+    console.log(' --- doc ----===', doc);
     const saved = await doc.save();
     return this.toEntity(saved);
   }
@@ -47,8 +48,8 @@ export class NotificationRepository implements INotificationRepository {
       doc.subject,
       doc.body,
       doc.mediaType,
-      doc.sentAt,
-      (doc._id as string).toString(),
+      doc.notificationType,
+      doc.createdAt,
     );
   }
 }
