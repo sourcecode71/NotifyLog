@@ -1,11 +1,8 @@
 module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'node',
-    roots: ['<rootDir>/src'],
-    testMatch: [ 
-    '**/*.spec.ts', // Look for spec files anywhere in src
-    '<rootDir>/test/**/*.spec.ts' // Keep existing test directory pattern
-    ],
+    roots: ['<rootDir>/src', '<rootDir>/test'],
+    testMatch: ['<rootDir>/test/**/*.spec.ts'],
     moduleFileExtensions: ['ts', 'js', 'json'],
     transform: {
       '^.+\\.ts$': ['ts-jest', {
