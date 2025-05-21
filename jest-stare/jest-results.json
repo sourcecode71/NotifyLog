@@ -26,101 +26,9 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1747823833511,
+  "startTime": 1747846429942,
   "success": false,
   "testResults": [
-    {
-      "leaks": false,
-      "numFailingTests": 0,
-      "numPassingTests": 4,
-      "numPendingTests": 0,
-      "numTodoTests": 0,
-      "openHandles": [],
-      "perfStats": {
-        "end": 1747823837103,
-        "runtime": 3007,
-        "slow": false,
-        "start": 1747823834096
-      },
-      "skipped": false,
-      "snapshot": {
-        "added": 0,
-        "fileDeleted": false,
-        "matched": 0,
-        "unchecked": 0,
-        "uncheckedKeys": [],
-        "unmatched": 0,
-        "updated": 0
-      },
-      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\test\\notification\\notification.controller.spec.ts",
-      "testResults": [
-        {
-          "ancestorTitles": [
-            "NotificationController",
-            "send"
-          ],
-          "duration": 25,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "NotificationController send should send notification and log successfully",
-          "invocations": 1,
-          "location": null,
-          "numPassingAsserts": 3,
-          "retryReasons": [],
-          "status": "passed",
-          "title": "should send notification and log successfully"
-        },
-        {
-          "ancestorTitles": [
-            "NotificationController",
-            "send"
-          ],
-          "duration": 9,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "NotificationController send should throw error if strategy send fails",
-          "invocations": 1,
-          "location": null,
-          "numPassingAsserts": 1,
-          "retryReasons": [],
-          "status": "passed",
-          "title": "should throw error if strategy send fails"
-        },
-        {
-          "ancestorTitles": [
-            "NotificationController",
-            "getNotificationHistory"
-          ],
-          "duration": 3,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "NotificationController getNotificationHistory should return notification history with default pagination",
-          "invocations": 1,
-          "location": null,
-          "numPassingAsserts": 2,
-          "retryReasons": [],
-          "status": "passed",
-          "title": "should return notification history with default pagination"
-        },
-        {
-          "ancestorTitles": [
-            "NotificationController",
-            "getNotificationHistory"
-          ],
-          "duration": 2,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "NotificationController getNotificationHistory should handle custom pagination",
-          "invocations": 1,
-          "location": null,
-          "numPassingAsserts": 2,
-          "retryReasons": [],
-          "status": "passed",
-          "title": "should handle custom pagination"
-        }
-      ],
-      "failureMessage": null
-    },
     {
       "leaks": false,
       "numFailingTests": 0,
@@ -129,10 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1747823837871,
-        "runtime": 3777,
+        "end": 1747846435233,
+        "runtime": 4662,
         "slow": false,
-        "start": 1747823834094
+        "start": 1747846430571
       },
       "skipped": false,
       "snapshot": {
@@ -144,14 +52,14 @@
         "unmatched": 0,
         "updated": 0
       },
-      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\test\\logger\\log.controller.spec.ts",
+      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\src\\notification\\presentation\\controllers\\log.controller.spec.ts",
       "testResults": [
         {
           "ancestorTitles": [
             "LogController",
             "getLogs"
           ],
-          "duration": 13,
+          "duration": 35,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogs should return logs with default pagination",
@@ -167,7 +75,7 @@
             "LogController",
             "getLogById"
           ],
-          "duration": 2,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogById should return a log by ID",
@@ -183,7 +91,7 @@
             "LogController",
             "getLogById"
           ],
-          "duration": 8,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogById should throw NotFoundException if log not found",
@@ -215,7 +123,7 @@
             "LogController",
             "deleteLogById"
           ],
-          "duration": 2,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController deleteLogById should throw NotFoundException if log not found",
@@ -231,7 +139,7 @@
             "LogController",
             "getLogStats"
           ],
-          "duration": 1,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogStats should return log statistics",
@@ -247,7 +155,7 @@
             "LogController",
             "getLogStats"
           ],
-          "duration": 1,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogStats should return stats without filters",
@@ -257,6 +165,98 @@
           "retryReasons": [],
           "status": "passed",
           "title": "should return stats without filters"
+        }
+      ],
+      "failureMessage": null
+    },
+    {
+      "leaks": false,
+      "numFailingTests": 0,
+      "numPassingTests": 4,
+      "numPendingTests": 0,
+      "numTodoTests": 0,
+      "openHandles": [],
+      "perfStats": {
+        "end": 1747846435444,
+        "runtime": 4875,
+        "slow": false,
+        "start": 1747846430569
+      },
+      "skipped": false,
+      "snapshot": {
+        "added": 0,
+        "fileDeleted": false,
+        "matched": 0,
+        "unchecked": 0,
+        "uncheckedKeys": [],
+        "unmatched": 0,
+        "updated": 0
+      },
+      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\src\\notification\\presentation\\controllers\\notification.controller.spec.ts",
+      "testResults": [
+        {
+          "ancestorTitles": [
+            "NotificationController",
+            "send"
+          ],
+          "duration": 30,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "NotificationController send should send notification and log successfully",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should send notification and log successfully"
+        },
+        {
+          "ancestorTitles": [
+            "NotificationController",
+            "send"
+          ],
+          "duration": 8,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "NotificationController send should throw error if strategy send fails",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should throw error if strategy send fails"
+        },
+        {
+          "ancestorTitles": [
+            "NotificationController",
+            "getNotificationHistory"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "NotificationController getNotificationHistory should return notification history with default pagination",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return notification history with default pagination"
+        },
+        {
+          "ancestorTitles": [
+            "NotificationController",
+            "getNotificationHistory"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "NotificationController getNotificationHistory should handle custom pagination",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should handle custom pagination"
         }
       ],
       "failureMessage": null
