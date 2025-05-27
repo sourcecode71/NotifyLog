@@ -11,6 +11,9 @@ import {
   NotificationType,
 } from '../../src/config/notification.config';
 
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference types="jest" />
+
 describe('NotificationController', () => {
   let controller: NotificationController;
   let factory: NotificationFactory;

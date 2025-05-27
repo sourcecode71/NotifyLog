@@ -26,7 +26,7 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1747846429942,
+  "startTime": 1748358209653,
   "success": false,
   "testResults": [
     {
@@ -37,10 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1747846435233,
-        "runtime": 4662,
-        "slow": false,
-        "start": 1747846430571
+        "end": 1748358215417,
+        "runtime": 5113,
+        "slow": true,
+        "start": 1748358210304
       },
       "skipped": false,
       "snapshot": {
@@ -52,14 +52,14 @@
         "unmatched": 0,
         "updated": 0
       },
-      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\src\\notification\\presentation\\controllers\\log.controller.spec.ts",
+      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\test\\logger\\log.controller.spec.ts",
       "testResults": [
         {
           "ancestorTitles": [
             "LogController",
             "getLogs"
           ],
-          "duration": 35,
+          "duration": 19,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogs should return logs with default pagination",
@@ -75,7 +75,7 @@
             "LogController",
             "getLogById"
           ],
-          "duration": 3,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogById should return a log by ID",
@@ -91,7 +91,7 @@
             "LogController",
             "getLogById"
           ],
-          "duration": 12,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogById should throw NotFoundException if log not found",
@@ -107,7 +107,7 @@
             "LogController",
             "deleteLogById"
           ],
-          "duration": 1,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController deleteLogById should delete a log by ID",
@@ -139,7 +139,7 @@
             "LogController",
             "getLogStats"
           ],
-          "duration": 2,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogStats should return log statistics",
@@ -177,10 +177,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1747846435444,
-        "runtime": 4875,
-        "slow": false,
-        "start": 1747846430569
+        "end": 1748358215656,
+        "runtime": 5359,
+        "slow": true,
+        "start": 1748358210297
       },
       "skipped": false,
       "snapshot": {
@@ -192,14 +192,14 @@
         "unmatched": 0,
         "updated": 0
       },
-      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\src\\notification\\presentation\\controllers\\notification.controller.spec.ts",
+      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\test\\notification\\notification.controller.spec.ts",
       "testResults": [
         {
           "ancestorTitles": [
             "NotificationController",
             "send"
           ],
-          "duration": 30,
+          "duration": 26,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "NotificationController send should send notification and log successfully",
@@ -215,7 +215,7 @@
             "NotificationController",
             "send"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "NotificationController send should throw error if strategy send fails",
@@ -231,7 +231,7 @@
             "NotificationController",
             "getNotificationHistory"
           ],
-          "duration": 2,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "NotificationController getNotificationHistory should return notification history with default pagination",
@@ -247,7 +247,7 @@
             "NotificationController",
             "getNotificationHistory"
           ],
-          "duration": 2,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "NotificationController getNotificationHistory should handle custom pagination",
