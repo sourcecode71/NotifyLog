@@ -45,3 +45,5 @@ bootstrap().catch(async (error: Error) => {
   console.log('Error during application bootstrap:', error);
   process.exit(1);
 });
+
+export { AppModule } from './app.module';

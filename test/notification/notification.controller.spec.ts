@@ -113,7 +113,7 @@ describe('NotificationController', () => {
       jest.spyOn(repository, 'findAll');
       const result = await controller.getNotificationHistory(1, 10);
 
-      // eslint-disable-next-line @typescript-eslint/unbound-method
+      // eslint-disable-next-line @typescript-eslint/unbound-method, @typescript-eslint/no-unsafe-call
       expect(repository.findAll).toHaveBeenCalledWith(0, 10);
       expect(result).toEqual({
         data: [mockNotification],
