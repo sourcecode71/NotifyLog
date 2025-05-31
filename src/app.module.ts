@@ -13,8 +13,8 @@ import { LoggerModule } from './logger/logger.module';
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => {
-        const uri = configService.get<string>('MONGO_URL');
+      useFactory: () => {
+        const uri = 'mongodb://localhost:27017/notifybd';
         if (!uri) {
           throw new Error('MONGO_URI not found in configuration');
         }
