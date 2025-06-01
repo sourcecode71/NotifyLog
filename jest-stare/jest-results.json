@@ -26,7 +26,7 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1748358209653,
+  "startTime": 1748763027193,
   "success": false,
   "testResults": [
     {
@@ -37,10 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1748358215417,
-        "runtime": 5113,
-        "slow": true,
-        "start": 1748358210304
+        "end": 1748763032488,
+        "runtime": 4644,
+        "slow": false,
+        "start": 1748763027844
       },
       "skipped": false,
       "snapshot": {
@@ -52,14 +52,14 @@
         "unmatched": 0,
         "updated": 0
       },
-      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\test\\logger\\log.controller.spec.ts",
+      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\src\\test\\logger\\log.controller.spec.ts",
       "testResults": [
         {
           "ancestorTitles": [
             "LogController",
             "getLogs"
           ],
-          "duration": 19,
+          "duration": 20,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogs should return logs with default pagination",
@@ -75,7 +75,7 @@
             "LogController",
             "getLogById"
           ],
-          "duration": 2,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogById should return a log by ID",
@@ -91,7 +91,7 @@
             "LogController",
             "getLogById"
           ],
-          "duration": 13,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogById should throw NotFoundException if log not found",
@@ -123,7 +123,7 @@
             "LogController",
             "deleteLogById"
           ],
-          "duration": 3,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController deleteLogById should throw NotFoundException if log not found",
@@ -139,7 +139,7 @@
             "LogController",
             "getLogStats"
           ],
-          "duration": 4,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogStats should return log statistics",
@@ -155,7 +155,7 @@
             "LogController",
             "getLogStats"
           ],
-          "duration": 2,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "LogController getLogStats should return stats without filters",
@@ -177,10 +177,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1748358215656,
-        "runtime": 5359,
-        "slow": true,
-        "start": 1748358210297
+        "end": 1748763032803,
+        "runtime": 4959,
+        "slow": false,
+        "start": 1748763027844
       },
       "skipped": false,
       "snapshot": {
@@ -192,14 +192,14 @@
         "unmatched": 0,
         "updated": 0
       },
-      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\test\\notification\\notification.controller.spec.ts",
+      "testFilePath": "D:\\Github_profile\\SmartEduHub-Repo\\NotifyLog\\src\\test\\notification\\notification.controller.spec.ts",
       "testResults": [
         {
           "ancestorTitles": [
             "NotificationController",
             "send"
           ],
-          "duration": 26,
+          "duration": 22,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "NotificationController send should send notification and log successfully",
@@ -215,7 +215,7 @@
             "NotificationController",
             "send"
           ],
-          "duration": 9,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "NotificationController send should throw error if strategy send fails",
