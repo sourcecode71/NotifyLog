@@ -170,9 +170,6 @@ This project is licensed under the MIT License.
 ---
 
 ## 📣 Contact & Credits
-
-Maintained by **Your Name** – feel free to connect on [LinkedIn] or [Twitter].
-
 Special thanks to all contributors 💖
 ```
 
