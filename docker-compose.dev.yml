@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/dev/Dockerfile
+    container_name: notify-pro-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "9229:9229" # Node.js debug port
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DEBUG=nest:*
+      - MONGO_URL=mongodb://mongo:27017/notifybd
+    volumes:
+      - ./src:/usr/src/app/src
+      - /usr/src/app/node_modules
+      - ./tsconfig.json:/usr/src/app/tsconfig.json
+      - ./nest-cli.json:/usr/src/app/nest-cli.json
+    depends_on:
+      - mongo
+    networks:
+      - backend
+    command: npm run start:dev
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongo-dev
+    restart: always
+    volumes:
+      - mongo-dev-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: notifybd
+    ports:
+      - "27018:27017" # Different port to avoid conflict with local mongo
+    networks:
+      - backend
+
+  # Optional Redis for development
+  redis:
+    image: redis:7-alpine
+    container_name: redis-dev
+    restart: always
+    volumes:
+      - redis-dev-data:/data
+    ports:
+      - "6380:6379" # Different port to avoid conflict
+    networks:
+      - backend
+
+  # Optional PGAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-dev
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - backend
+
+volumes:
+  mongo-dev-data:
+    driver: local
+  redis-dev-data:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge

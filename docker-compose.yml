@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/prod/Dockerfile
+    container_name: notify-pro
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGO_URL=mongodb://mongo:27017/notifybd
+      # Add other environment variables from your .env
+    depends_on:
+      - mongo
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - backend
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: notifybd
+    networks:
+      - backend
+    ports:
+      - "27017:27017"
+
+  # Optional Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: always
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongo-data:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge
