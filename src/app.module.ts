@@ -8,15 +8,16 @@ import { LoggerModule } from './logger/logger.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env', // Explicit path to .env
-      ignoreEnvFile: false, // Ensure it's not ignored
+      envFilePath: '.env', // Loads .env from root directory
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: () => {
-        const uri = 'mongodb://localhost:27017/notifybd';
+      useFactory: async (configService: ConfigService) => {
+        const uri = await Promise.resolve(
+          configService.get<string>('MONGO_URL'),
+        );
         if (!uri) {
-          throw new Error('MONGO_URI not found in configuration');
+          throw new Error('MONGO_URL not found in configuration');
         }
         return { uri };
       },

@@ -1,0 +1,17 @@
+# Stage 1: Build
+FROM node:18.16.0-windowsservercore AS builder
+WORKDIR C:/app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+
+# Stage 2: Run
+FROM node:18.16.0-windowsservercore
+WORKDIR C:/app
+COPY --from=builder C:/app/node_modules ./node_modules
+COPY --from=builder C:/app/dist ./dist
+COPY --from=builder C:/app/package*.json ./
+
+EXPOSE 3000
+CMD ["node", "dist/main"]
