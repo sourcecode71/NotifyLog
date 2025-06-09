@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    image: notifylog:prod
+    build:
+      context: .
+      dockerfile: docker/prod/Dockerfile.windows
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URL=mongodb://mongo:27017/notifylog-prod
+    restart: unless-stopped
+    networks:
+      - backend
+
+  mongo:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: your_secure_password
+      MONGO_INITDB_DATABASE: notifylog-prod
+    restart: unless-stopped
+    networks:
+      - backend
+
+volumes:
+  mongo_data:
+    driver: local
+    name: notifylog_mongo_data
+
+networks:
+  backend:
+    driver: nat

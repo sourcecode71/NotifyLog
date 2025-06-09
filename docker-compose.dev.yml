@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    image: notifylog:dev
+    build:
+      context: .
+      dockerfile: docker/dev/Dockerfile.windows
+    volumes:
+      - type: bind
+        source: D:\Github_profile\SmartEduHub-Repo\NotifyLog   # host path (Windows OK)
+        target: /app                                          # <= POSIX path
+        consistency: cached
+      - type: volume
+        source: app_node_modules
+        target: /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - MONGO_URL=mongodb://mongo:27017/notifylog
+
+  mongo:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  app_node_modules:
+    name: notifylog_app_node_modules
+  mongo_data:

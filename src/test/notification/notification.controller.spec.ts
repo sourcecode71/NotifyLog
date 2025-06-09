@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { NotificationController } from '../../src/notification/presentation/controllers/notification.controller';
-import { NotificationFactory } from '../../src/notification/application/factories/notification.factory';
-import { INotificationRepository } from '../../src/notification/domain/interfaces/notification-repository.interface';
-import { LoggerServiceFile } from '../../src/logger/services/logger.service.file';
-import { LoggerServiceDb } from '../../src/logger/services/logger.service.db';
-import { SendNotificationDto } from '../../src/notification/presentation/dtos/send-notification.dto';
-import { Notification } from '../../src/notification/domain/entities/notification.entity';
+import { NotificationController } from '../../../src/notification/presentation/controllers/notification.controller';
+import { NotificationFactory } from '../../../src/notification/application/factories/notification.factory';
+import { INotificationRepository } from '../../../src/notification/domain/interfaces/notification-repository.interface';
+import { LoggerServiceFile } from '../../../src/logger/services/logger.service.file';
+import { LoggerServiceDb } from '../../../src/logger/services/logger.service.db';
+import { SendNotificationDto } from '../../../src/notification/presentation/dtos/send-notification.dto';
+import { Notification } from '../../../src/notification/domain/entities/notification.entity';
 import {
   NotificationChannel,
   NotificationType,
-} from '../../src/config/notification.config';
+} from '../../../src/config/notification.config';
 
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference types="jest" />

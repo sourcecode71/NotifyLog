@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+*.log
+.env.local
+.env.docker.local
+Dockerfile
+docker-compose*
+npm-debug.log
+build
+coverage
+test
