@@ -1,18 +1,3 @@
-Here’s an updated `README.md` with a clean **Docker section** and a **concise project structure**. I’ve also updated `yourusername` to `mostafiz51`.
-
----
-
-### ✅ Suggested Changes Summary:
-
-* **Added:** Docker section with clear usage instructions.
-* **Updated:** Project structure (trimmed to show only major folders/files).
-* **Fixed:** Badges and links to reflect your username (`mostafiz51`).
-
----
-
-### ✅ Updated README Snippet
-
-````markdown
 # 📬 NotifyLog
 
 > A microservice-based Notification Logger built with NestJS and Next.js to send, track, and analyze Email, SMS, and Webhook messages.
@@ -175,7 +160,6 @@ MIT License
 
 Thanks to all contributors! 💖
 
-```
 
 ---
 
