@@ -1,9 +1,24 @@
+Here’s an updated `README.md` with a clean **Docker section** and a **concise project structure**. I’ve also updated `yourusername` to `mostafiz51`.
+
+---
+
+### ✅ Suggested Changes Summary:
+
+* **Added:** Docker section with clear usage instructions.
+* **Updated:** Project structure (trimmed to show only major folders/files).
+* **Fixed:** Badges and links to reflect your username (`mostafiz51`).
+
+---
+
+### ✅ Updated README Snippet
+
+````markdown
 # 📬 NotifyLog
 
 > A microservice-based Notification Logger built with NestJS and Next.js to send, track, and analyze Email, SMS, and Webhook messages.
 
-![CI](https://img.shields.io/github/actions/workflow/status/yourusername/notifylog/ci.yml?branch=main)
-![License](https://img.shields.io/github/license/yourusername/notifylog)
+![CI](https://img.shields.io/github/actions/workflow/status/mostafiz51/notifylog/ci.yml?branch=main)
+![License](https://img.shields.io/github/license/mostafiz51/notifylog)
 ![Node.js](https://img.shields.io/badge/node-%3E=18.x-green)
 ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 
@@ -21,83 +36,76 @@
 
 ---
 
-## 📖 Overview
-
-**NotifyLog** is a robust, plug-and-play Node.js-based notification microservice designed to handle multi-channel communication like Email, SMS, and Webhooks, all with centralized logging and GraphQL API support. Built using **NestJS** and **Next.js**, it follows clean architecture principles and is deployable in a distributed, containerized environment.
-
-Use NotifyLog as:
-- A backend service for sending and tracking messages
-- A standalone logger for notification events
-- An integration-ready module in any SaaS or enterprise app
-
----
-Sure! Here's a clean and properly formatted `README.md` file that includes all the content you provided:
-
----
-
-```markdown
-# NotifyLog 🚨
-
-A notification management system with logging, monitoring, and multi-channel delivery support.
-
----
-
 ## ⚙️ Setup & Installation
 
 ### 🔧 Prerequisites
 
-- **Node.js** ≥ 18.x
-- **Yarn** or **npm**
-- **MongoDB** or **MongoDB Atlas**
-- **Docker** (optional)
-
----
-
-## 🚀 Run Locally
+- Node.js ≥ 18.x
+- Yarn or npm
+- MongoDB
+- Docker (optional)
 
 ```bash
 # Clone repo
-git clone https://github.com/yourusername/notifylog.git && cd notifylog
+git clone https://github.com/mostafiz51/notifylog.git && cd notifylog
 
 # Install dependencies
 yarn install
 
-# Setup environment variables
+# Setup environment
 cp .env.example .env
-# Fill in your email/SMS API keys, Mongo URI, etc.
+# Fill required variables (Mongo URI, API keys, etc.)
 
 # Start backend
 yarn start:dev:api
 
 # Start frontend
 yarn start:dev:ui
-```
+````
 
 ---
 
 ## 🐳 Run with Docker
 
 ```bash
+# Build and run containers
 docker-compose up --build
+```
+
+> Ensure you’ve configured `.env` file correctly before running.
+
+To push the image to Docker Hub (replace `mostafiz51/notifylog` with your repo):
+
+```bash
+# Tag image
+docker tag notifylog:dev mostafiz51/notifylog:latest
+
+# Login and push
+docker login
+docker push mostafiz51/notifylog:latest
 ```
 
 ---
 
+## 📂 Project Structure (Simplified)
 
-
-## 📌 Features
-
-✅ GraphQL API to manage notifications, logs, and subscriptions  
-📧 Email Module (send emails using SendGrid/Mailgun)  
-📲 SMS Module (Twilio integration)  
-🔔 Webhook Support (event-based triggers to external services)  
-📝 MongoDB Logging with Winston (request/response/errors)  
-🧩 Extensible Providers (add your own integrations easily)  
-💻 Next.js UI for monitoring and manual message dispatch  
+```bash
+notifylog/
+├── src/
+│   ├── config/               # Shared enums/config
+│   ├── logger/               # Notification core logic
+│   ├── common/               # Common utilities & pipes
+│   ├── app.module.ts
+│   ├── main.ts
+├── ui/                       # Next.js frontend dashboard
+├── docker-compose.yml
+├── .env.example
+├── package.json
+```
 
 ---
 
-## 🔬 Example GraphQL Query
+## 🔬 GraphQL Example
 
 ```graphql
 mutation SendEmail {
@@ -118,118 +126,58 @@ mutation SendEmail {
 ## 🧪 Testing
 
 ```bash
-# Run all tests
 yarn test
-
-# Run coverage
 yarn test:cov
 ```
-###  Test Result
-- **[NotifyLog](https://github.com/sourcecode71/NotifyLog)**: Notification service built with NestJS. View my [Jest Test Report](https://sourcecode71.github.io/NotifyLog) for automated test results!
+
+🧪 [View Jest Test Report](https://sourcecode71.github.io/NotifyLog)
+
 ---
 
 ## 📈 Roadmap
 
-- WebSocket-based real-time logs  
-- Retry strategy for failed webhook calls  
-- Admin dashboard analytics  
-- SMTP transport fallback  
-- Mobile-friendly UI  
+* WebSocket real-time log stream
+* Retry failed webhooks
+* Admin dashboard analytics
+* SMTP fallback support
+* Mobile-friendly UI
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions of all kinds!
-
 1. Fork the repo
-2. Create your feature branch: `git checkout -b feat/amazing-feature`
-3. Commit your changes: `git commit -am 'Add amazing feature'`
-4. Push to the branch: `git push origin feat/amazing-feature`
-5. Open a pull request
-
-For more info, see [CONTRIBUTING.md](CONTRIBUTING.md)
+2. Create branch: `git checkout -b feat/feature-name`
+3. Commit: `git commit -am "add: new feature"`
+4. Push: `git push origin feat/feature-name`
+5. Open PR
 
 ---
 
 ## 🐛 Issue Templates
 
-Need to report a bug or request a feature? Use the templates in `.github/ISSUE_TEMPLATE`:
+Available in `.github/ISSUE_TEMPLATE`:
 
-- 🐞 Bug Report  
-- ✨ Feature Request  
-- 📚 Documentation Update  
-- 🆕 Good First Issue  
+* 🐞 Bug Report
+* ✨ Feature Request
+* 📚 Documentation Update
+* 🆕 Good First Issue
 
 ---
 
 ## 🛡 License
 
-This project is licensed under the MIT License.
+MIT License
 
 ---
 
-## 📣 Contact & Credits
-Special thanks to all contributors 💖
+## 🙌 Credits
+
+Thanks to all contributors! 💖
+
 ```
 
 ---
 
-Let me know if you'd like this customized with your actual GitHub username, social links, or any branding tweaks!
-
-## 📂 Project Structure
-
-```bash
-notifylog/
-├── apps/
-│   ├── notifylog-api/
-│   │   ├── src/
-│   │   │   ├── config/
-│   │   │   │   └── notification.config.ts  # Shared enums (NotificationType, NotificationChannel)
-│   │   │   ├── common/
-│   │   │   │   └── validation/
-│   │   │   │       └── joi-validation.pipe.ts
-│   │   │   ├── logger/
-│   │   │   │   ├── domain/
-│   │   │   │   ├── infrastructure/
-│   │   │   │   ├── presentation/
-│   │   │   │   └── application/
-│   │   │   ├── notification/
-│   │   │   │   ├── application/
-│   │   │   │   │   ├── factories/
-│   │   │   │   │   │   └── notification.factory.ts
-│   │   │   │   │   └── strategies/
-│   │   │   │   │       ├── email-notification.strategy.ts
-│   │   │   │   │       └── sms-notification.strategy.ts
-│   │   │   │   ├── domain/
-│   │   │   │   │   ├── entities/
-│   │   │   │   │   │   └── notification.entity.ts
-│   │   │   │   │   ├── errors/
-│   │   │   │   │   │   └── notification.error.ts  # Example error class
-│   │   │   │   │   └── interfaces/
-│   │   │   │   │       ├── notification-repository.interface.ts
-│   │   │   │   │       ├── notification-strategy.interface.ts
-│   │   │   │   │       └── webhook-repository.interface.ts
-│   │   │   │   ├── infrastructure/
-│   │   │   │   │   ├── repositories/
-│   │   │   │   │   │   ├── notification.repository.ts
-│   │   │   │   │   │   └── webhook.repository.ts
-│   │   │   │   │   └── persistence/
-│   │   │   │   │       ├── mongodb/
-│   │   │   │   │       │   └── notification.schema.ts
-│   │   │   │   │       └── postgresql/
-│   │   │   │   │           └── webhook.schema.ts  # Example for PostgreSQL
-│   │   │   │   ├── presentation/
-│   │   │   │   │   ├── controllers/
-│   │   │   │   │   │   ├── notification.controller.ts
-│   │   │   │   │   │   └── webhook.controller.ts
-│   │   │   │   │   └── dto/
-│   │   │   │   │       ├── send-notification.dto.ts
-│   │   │   │   │       └── create-webhook.dto.ts
-│   │   │   ├── app.module.ts
-│   │   │   ├── main.ts
-│   │   │   └── services/
-│   │   │       └── log.service.ts
-│   │   ├── package.json
-│   │   ├── tsconfig.json
-│   │   └── .env.example
+Let me know if you'd like to add Docker Hub badges, auto-publish GitHub Actions, or CI/CD steps!
+```
